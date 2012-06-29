@@ -1,20 +1,30 @@
 Wordsmith::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users#, prefix: 'd'
+	resources :users, only: [:show]
+  resources :words
+
+	authenticated :user do
+    root to: 'words#new'
+	end
 
 	root to: 'static_pages#index'
 
-	authenticated :user do
-		root to: 'users#show' # can I create a Users controller?
-	end
+	#match '/profile', to: "users#show"
 
-	devise_scope :user do
-		match '/register', to: 'devise/registrations#new', :as => :register
-		match '/login', to: 'devise/sessions#new', :as => :login
-		match '/logout', to: 'devise/sessions#destroy', :as => :logout
-		match '/forgot_password', to: 'devise/passwords#new'
-		match '/resend_confirmation', to: 'devise/confirmations#new'
-	end
+
+	#devise_scope :user do
+	#	match '/register', to: 'devise/registrations#new', :as => :register
+	#	match '/login', to: 'devise/sessions#new', :as => :login
+	#	match '/logout', to: 'devise/sessions#destroy', :as => :logout
+	#	match '/forgot_password', to: 'devise/passwords#new'
+	#	match '/resend_confirmation', to: 'devise/confirmations#new'
+	#end
+
+
+
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

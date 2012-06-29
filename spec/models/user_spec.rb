@@ -1,3 +1,16 @@
+require 'spec_helper'
+
+describe User do
+
+	before do
+		@user = User.new(email: "example@example.com", password: "foobar",
+										 password_confirmation: "foobar")
+	end
+
+	subject { @user }
+	it { should respond_to(:words) }
+
+end
 # == Schema Information
 #
 # Table name: users
@@ -17,18 +30,3 @@
 #  updated_at             :datetime        not null
 #
 
-class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-				 #:confirmable
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-
-	has_many :words
-
-end

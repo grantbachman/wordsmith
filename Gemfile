@@ -8,14 +8,13 @@ gem 'wordnik', "~> 4.07"
 group :test, :development do
 	gem 'thin'
 	gem 'sqlite3'
+	gem 'rspec'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'factory_girl_rails'
 	gem 'spork'
 	gem 'guard-spork'
-end
-
-group :test do
+	gem 'annotate', '~> 2.4.1.beta'
 	gem 'capybara'
 end
 
