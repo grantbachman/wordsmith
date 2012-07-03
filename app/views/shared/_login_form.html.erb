@@ -1,0 +1,8 @@
+<span id="loginForm">
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), class: "form-horizontal navbar-form") do |f| %>
+	<%= f.email_field :email, placeholder: "Email", class: "input-small" %>
+	<%= f.password_field :password, placeholder: "Password", class: "input-small" %>
+	<%= f.submit "Log in", class: "btn" %>
+<% end %>
+</span>
+<!-- well form-inline navbar-form pull-right -->

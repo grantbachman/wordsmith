@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.5'
 gem 'devise'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 2.0.4'
 gem 'wordnik', "~> 4.07"
 
 group :test, :development do

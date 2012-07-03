@@ -5,14 +5,36 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+	<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 </head>
-<body>
-<% flash.each do |key, value| %>
-	<div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-<%= render 'layouts/header' %>
-<%= yield %>
-
-<%= debug(params) if Rails.env.development? %>
+	<header>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<%= link_to "wordsmith", root_path, id: "logo" %> 
+					<nav>
+						<ul class="nav pull-right">
+							<% if signed_in? %>
+								<li><%= link_to "home", root_path %></li>
+								<li><%= link_to "log out", destroy_user_session_path, method: :delete %></li>
+							<% else %>
+								<%= render 'shared/login_form' %>
+							<% end %>
+						</ul>
+					</nav>	
+					<%#= render 'layouts/header' %>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container">
+	<% flash.each do |key, value| %>
+		<div class="alert alert-<%= key %>"><%= value %></div>
+	<% end %>
+	<%= yield %>
+	<%= debug(params) if Rails.env.development? %>
+</div>
 </body>
 </html>
