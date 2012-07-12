@@ -2,6 +2,17 @@
 	<h2 class="center">Log in</h2><br />
 	
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	  
+		<% unless flash.blank? %>
+			<div class="alert alert-error">
+				<ul>
+					<% flash.each do |key, value| %>
+						<li><%= value %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
 	  <div><%= f.email_field :email, placeholder: "Email", class: "input-medium" %></div>
 
 	  <div><%= f.password_field :password, placeholder: "Password", class: "input-medium" %></div>
