@@ -4,6 +4,8 @@ gem 'rails', '3.2.5'
 gem 'devise'
 gem 'bootstrap-sass', '~> 2.0.4'
 gem 'wordnik', "~> 4.07"
+gem 'thin'
+gem 'foreman'
 
 group :test, :development do
 	gem 'sqlite3'
