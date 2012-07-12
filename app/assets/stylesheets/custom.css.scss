@@ -1,32 +1,103 @@
 @import "bootstrap";
 
-#logo {
+header {
+
+	width: 100%;
+	/* why is there 20px of extra space to the right if the min-width is 940px? */
+	min-width: 960px;
+	background-color: #2c2c2c;
+	height: 45px;
+
+	#logo {
+		float: left;
+		font-size: 2.7em;
+		color: white;
+		#text-transform: uppercase;
+		letter-spacing: -1px;
+		padding-top: 4px;
+		font-weight: bold;
+		line-height: 1;
+		&:hover {
+			text-decoration: none;
+		}	
+	}
+
+	#navLoginForm {
+		float: right;
+
+		#loginFields {
+			float: left;
+			width: 208px;
+		}
+	}
+
+	#navNavLinks {
+		margin-top: 4px;
+		float: right;
+		list-style-type: none;
+		li {
+			float: left;
+			padding-left: 15px;
+			a {
+				color: #aaa;
+				&:hover {
+					color: white;
+					text-decoration: none;
+				}
+			}	
+		}
+	}
+}
+
+#main {
+	margin-top: 20px;
+	width: 940px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#mainForm {
+	width: 210px;
+	margin: auto auto;
+	.input-medium {
+		width: 200px;
+	}
+	#rememberMe {
+		padding-left: 4px;
+		vertical-align: bottom;
+	}
+
+	.btn-primary {
+		margin-top: 8px;
+		width: 210px;
+	}
+	.alert-error {
+		padding-left: 0px;
+		padding-right: 0px;
+		padding-bottom: 0px;
+	}
+	.center {
+		text-align: center;	
+	}
+}
+
+#indexLeft {
+	position: relative;
 	float: left;
-	font-size: 2.3em;
-	color: white;
-	#text-transform: uppercase;
-	letter-spacing: -1px;
-	padding-top: 6px;
-	font-weight: bold;
-	line-height: 1;
-	&:hover {
-		text-decoration: none;
-	}	
-	#background-color: green;
+	width: 470px;
 }
 
-body {
-	padding-top: 60px;
+#indexRight {
+	position: relative;
+	float: left;
+	width: 470px;
 }
 
-.formError {
-	background-color: red;
+.debug_dump {
+	width: 940px;
+	float: left;
 }
-/*
-#loginForm {
-	height: 35px;
-	float: right;
-	padding-top: 7px;
-	background-color: red;
+
+.field_with_errors {
+	display: inline;
 }
-*/
