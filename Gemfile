@@ -6,7 +6,6 @@ gem 'bootstrap-sass', '~> 2.0.4'
 gem 'wordnik', "~> 4.07"
 
 group :test, :development do
-	gem 'thin'
 	gem 'sqlite3'
 	gem 'rspec'
 	gem 'rspec-rails'
