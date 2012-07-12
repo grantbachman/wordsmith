@@ -1,12 +1,22 @@
-<h2>Sign up</h2><br />
+<h2 class="center">Sign up</h2><br />
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <div class="formError"><%= devise_error_messages! %></div>
 
-  <div><%= f.email_field :email, placeholder: "Email" %></div>
+	<% unless devise_error_messages!.blank? %>
+		<div class="alert alert-error">
+			<ul>
+			<% devise_error_messages!.to_a.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+		</div>
+	<% end %>
 
-  <div><%= f.password_field :password, placeholder: "Password" %></div>
+  <div><%= f.email_field :email, placeholder: "Email", class: "input-medium" %></div>
 
-  <div><%= f.password_field :password_confirmation, placeholder: "Again" %></div><br />
+  <div><%= f.password_field :password, placeholder: "Password", class: "input-medium" %></div>
+
+  <div><%= f.password_field :password_confirmation, placeholder: "Again", class: "input-medium" %></div>
 
   <div><%= f.submit "Sign up", class: "btn btn-primary" %></div>
 <% end %>
+

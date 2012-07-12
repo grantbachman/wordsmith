@@ -9,30 +9,32 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
+<body>
 	<header>
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<%= link_to "wordsmith", root_path, id: "logo" %> 
-					<nav>
-						<ul class="nav pull-right">
-							<% if signed_in? %>
-								<li><%= link_to "home", root_path %></li>
-								<li><%= link_to "log out", destroy_user_session_path, method: :delete %></li>
-							<% else %>
-								<%= render 'shared/login_form' %>
-							<% end %>
-						</ul>
-					</nav>	
-					<%#= render 'layouts/header' %>
-				</div>
-			</div>
+		<div class="container">
+			<%= link_to "wordsmith", root_path, id: "logo" %> 
+			<nav>
+				<ul class="">
+					<% if signed_in? %> 
+						<div id="navNavLinks">
+								<li><%= link_to "Home", root_path %></li>
+								<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+						</div>
+					<% else %>
+						<%= render 'shared/login_form' if current_page?(root_path) %>
+					<% end %>
+				</ul>
+			</nav>	
+			<%#= render 'layouts/header' %>
 		</div>
 	</header>
-<div class="container">
-	<% flash.each do |key, value| %>
-		<div class="alert alert-<%= key %>"><%= value %></div>
+<div id="main">
+	<% unless (params[:controller] == 'devise/sessions' || params[:controller] == 'devise/registrations') && (params[:action] == 'create') %>
+		<% flash.each do |key, value| %>
+			<div class="alert alert-<%= key %>"><%= value %></div>
+		<% end %>
 	<% end %>
+
 	<%= yield %>
 	<%= debug(params) if Rails.env.development? %>
 </div>
