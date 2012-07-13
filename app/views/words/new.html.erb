@@ -1,4 +1,4 @@
-<%= render 'shared/error_messages', object: @word %>
+<%#= render 'shared/error_messages', object: @word %>
 <%= form_for @word, html: { class: "form-inline" } do |f| %>
 	<%#= render 'shared/error_messages', object: f.object %>
 	<%= f.text_field :name, placeholder: "Add a word" %>	
