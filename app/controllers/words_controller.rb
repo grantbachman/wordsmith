@@ -16,6 +16,8 @@ class WordsController < ApplicationController
 		else
 			if @word.save
 				flash[:success] = "Word added"
+				QuizMailer.welcome_email(current_user).deliver
+
 				redirect_to root_path
 			else
 				flash[:error] = @word.errors.full_messages[0]
