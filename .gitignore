@@ -4,9 +4,10 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
-# Ignore my password file
+# gdb Ignore my password file
 /config/my_secrets.yml
-
+# gdb Also ignore the secret_token file
+/config/initializers/secret_token.rb
 
 # Ignore bundler config
 /.bundle
