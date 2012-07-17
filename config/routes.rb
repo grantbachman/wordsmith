@@ -3,6 +3,7 @@ Wordsmith::Application.routes.draw do
   devise_for :users#, prefix: 'd'
 	resources :users, only: [:show]
   resources :words
+	resources :incoming_emails, only: [:create]
 
 	authenticated :user do
     root to: 'words#new'
