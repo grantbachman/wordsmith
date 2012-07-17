@@ -1,9 +1,10 @@
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.sendgrid.net',
+	:address        => 'smtp.mailgun.org',
   :port           => '587',
   :authentication => :plain,
-  :user_name      => MY_CONFIG[:sendgrid][:username],
-  :password       => MY_CONFIG[:sendgrid][:password],
-  :domain         => 'heroku.com'
+  :user_name      => MY_CONFIG[:mailgun][:username],
+  :password       => MY_CONFIG[:mailgun][:password],
+  :domain         => 'wordsmith.mailgun.org'
+
 }
