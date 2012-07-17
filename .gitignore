@@ -4,7 +4,6 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
-<<<<<<< HEAD
 # gdb Ignore my password file
 /config/my_secrets.yml
 
@@ -12,19 +11,9 @@
 /.bundle
 
 
-=======
-# Ignore bundler config
-/.bundle
-
->>>>>>> 96205aa73154cef045db702d58a6fbd2b6d2e323
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 96205aa73154cef045db702d58a6fbd2b6d2e323
