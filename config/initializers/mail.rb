@@ -1,10 +1,10 @@
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-	:address        => 'smtp.mailgun.org',
-  :port           => '587',
+	:address        => ENV['MAILGUN_SMTP_SERVER'], 
+  :port           => ENV['MAILGUN_SMTP_PORT'], 
   :authentication => :plain,
-  :user_name      => MY_CONFIG[:mailgun][:username],
-  :password       => MY_CONFIG[:mailgun][:password],
+  :user_name      => ENV['MAILGUN_SMTP_LOGIN'], 
+  :password       => ENV['MAILGUN_SMTP_PASSWORD'], 
   :domain         => 'wordsmith.mailgun.org'
 
 }

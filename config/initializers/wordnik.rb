@@ -1,3 +1,3 @@
 Wordnik.configure do |config|
-	config.api_key = MY_CONFIG[:wordnik][:api_key]
+	config.api_key = ENV['WORDNIK_API_KEY'] 
 end
