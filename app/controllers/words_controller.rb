@@ -9,6 +9,7 @@ class WordsController < ApplicationController
 	def create
 		@words = current_user.words.all
 		@word = current_user.words.build(params[:word])
+		@word.name.downcase!
 		@theWord = Wordnik.word.get_definitions(params[:word][:name])
 		if @theWord.blank?
 			flash[:error] = "That isn't a real word to our knowledge..."
