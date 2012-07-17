@@ -6,6 +6,7 @@
 
 # gdb Ignore my password file
 /config/my_secrets.yml
+/.env
 
 # Ignore bundler config
 /.bundle
