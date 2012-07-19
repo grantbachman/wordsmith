@@ -7,6 +7,7 @@ class IncomingEmailsController < ApplicationController
 			user = User.find_by_email("grantbachman@gmail.com")
 			word = user.words.build(name: "success")
 			word.save	
+			render nothing: true
 		else
 			render text: "This is bad."
 		end
