@@ -9,6 +9,7 @@ describe User do
 
 	subject { @user }
 	it { should respond_to(:words) }
+	it { should respond_to(:quizzes) }
 
 end
 # == Schema Information

@@ -9,9 +9,8 @@ describe "Authentication" do
 			before { visit root_path }
 
 			it "should have correct links" do
-			 	#it { should have_link('Log in', href: new_user_session_path) }
-			 	page.should have_link('Log in', href: new_user_session_path)
-				page.should have_link('Sign up', href: new_user_registration_path)
+			 	page.should have_button('Log in')
+				page.should have_button('Sign up')
 			end
 		end
 		
@@ -30,16 +29,15 @@ describe "Authentication" do
 		before { visit new_user_registration_path }
 
 		it "should not register users with invalid info" do
-			fill_in "Email",											:with => "blah.com"
-			fill_in "Password", 									:with => "short"
+			fill_in "user_email",											:with => "blah@gmail.com"
+			fill_in "user_password", 									:with => "short"
 			fill_in "user_password_confirmation", :with => "short" # Why won't "Again" work?
 			expect { click_button "Sign up" }.not_to change(User, :count)
-			page.should have_selector('div#error_explanation') # because Devise handles registration errors different from session errors...why?
 		end
 
 		it "should register users with valid info" do
-			fill_in "Email",											:with => "example@example.com"
-			fill_in "Password", 									:with => "foobar"
+			fill_in "user_email",											:with => "example@example.com"
+			fill_in "user_password", 									:with => "foobar"
 			fill_in "user_password_confirmation",	:with => "foobar" # Why won't "Again" work?
 			expect { click_button "Sign up" }.to change(User, :count).by(1)
 		end
@@ -55,12 +53,12 @@ describe "Authentication" do
 
 		it "should not login users with invalid data" do
 			click_button "Log in"
-			page.should have_selector('div.alert.alert-alert')
+			page.should have_selector('div.alert.alert-error')
 		end
 
 		it "should login users with valid data" do
-			fill_in "Email", 		with: user.email
-			fill_in "Password", with: user.password
+			fill_in "user_email", 		with: user.email
+			fill_in "user_password", with: user.password
 			click_button "Log in"
 			page.should have_content("Signed in successfully")
 		end

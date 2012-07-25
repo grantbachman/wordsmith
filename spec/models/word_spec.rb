@@ -18,11 +18,11 @@ describe Word do
 	
 	subject { @word }
 	
+	it { should respond_to (:questions) }
 	it { should respond_to(:name) }
 	it { should respond_to(:user_id) }
 	it { should respond_to(:user) }
 	its(:user) { should == user }
-
 	it { should be_valid }
 
 	describe "when word is not present" do
@@ -30,7 +30,7 @@ describe Word do
 		it { should_not be_valid }
 	end
 
-	describe "when user id is not present" do
+	describe "when user_id is not present" do
 		before { @word.user_id = nil }
 		it { should_not be_valid }
 	end

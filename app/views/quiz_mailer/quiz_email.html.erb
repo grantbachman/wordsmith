@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+		<h2>Quiz</h2>
+		<p>
+			<% @quiz_hash.each do |word, definition| %>
+				<%= word %>:<%= definition %>
+			<% end %>
+		</p>
+	</body>
+</html>

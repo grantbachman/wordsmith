@@ -1,8 +1,11 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :word do
-    name "paradox"
-	user
+  factory :question do
+  	user
+  	quiz
+    type ""
+    answer "MyString"
+    correct false
   end
 end
