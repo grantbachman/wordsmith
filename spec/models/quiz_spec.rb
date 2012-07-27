@@ -6,6 +6,8 @@
 #  user_id    :integer
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  auth_hash  :string(255)
+#  answer_key :string(255)
 #
 
 require 'spec_helper'
@@ -19,6 +21,7 @@ describe Quiz do
 
 	it { should respond_to(:user) }
 	it { should respond_to(:user_id) }
+	it { should respond_to(:auth_hash) }
 	its(:user) { should == user }
 	it { should be_valid }
 
@@ -26,7 +29,6 @@ describe Quiz do
 		before(:each) { @quiz.user_id = nil }
 		it { should_not be_valid }
 	end
-
 
 	describe "accessible attributes" do
 		it "should not allow access to user_id" do

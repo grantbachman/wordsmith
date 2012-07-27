@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  </head>
-  <body>
-		<h2>Quiz</h2>
-		<p>
-			<% @quiz_hash.each do |word, definition| %>
-				<%= word %>:<%= definition %>
-			<% end %>
-		</p>
+	<head>
+	</head>
+	<body>
+	<style type="text/css">
+
+	#quiz_definitions {
+		float: left;
+		width: 75%;
+	}
+
+	#quiz_wordbank {
+		float: left;
+		text-align: right;
+		width: 25%;
+	}
+	ol {
+		margin-left: 0px;
+		padding-left: 0px;
+		list-style-position: inside;
+	}
+
+	ul {
+		list-style-type: none;
+	}
+
+
+	#quiz_definitions li {
+		padding-bottom: 15px;
+	}
+
+	</style>
+
+	  	<div id="quiz_definitions">
+	  		<ol>
+				<% @defs_array.each do |definition| %>
+					<li><%= definition %></li>	
+				<% end %>
+	  		</ol>
+	  	</div>
+	  	<div id="quiz_wordbank">
+	  		<ul>
+	  			<% @words_array.each do |word| %>
+	  				<li><%= word %></li>
+	  			<% end %>
+	  		</ul>
+	  	</div>
 	</body>
 </html>
