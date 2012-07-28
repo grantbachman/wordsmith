@@ -32,7 +32,7 @@ class QuizMailer < ActionMailer::Base
 
 		@words_array.shuffle!
 
-		mail(to: user.email, subject: "Your quiz has arrived.")
+		mail(to: user.email, subject: "Quiz #{user.quizzes.count} has arrived.")
 
 		# put the above logic in the quiz model	
 

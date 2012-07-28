@@ -6,6 +6,8 @@ gem 'bootstrap-sass', '~> 2.0.4'
 gem 'wordnik', "~> 4.07"
 gem 'thin'
 gem 'foreman'
+gem 'premailer-rails3'
+gem 'nokogiri' # 'premailer-rails3' dependency
 
 group :test, :development do
 	gem 'sqlite3'

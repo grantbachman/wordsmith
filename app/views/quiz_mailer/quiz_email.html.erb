@@ -5,46 +5,76 @@
 	<body>
 	<style type="text/css">
 
-	#quiz_definitions {
-		float: left;
-		width: 75%;
-	}
+		#quiz_definitions {
+			float: left;
+			max-width: 475px;
+			margin-bottom: 10px;
+		}
 
-	#quiz_wordbank {
-		float: left;
-		text-align: right;
-		width: 25%;
-	}
-	ol {
-		margin-left: 0px;
-		padding-left: 0px;
-		list-style-position: inside;
-	}
+		#quiz_wordbank {
+			float: left;
+			max-width: 200px;
+			margin-left: 20px;
+		}
 
-	ul {
-		list-style-type: none;
-	}
+		ol {
+			margin: 0px;
+			padding: 0px;
+			list-style-position: inside;
+		}
 
+		#quiz_wordbank ol {
+			list-style-type: lower-alpha;
+		}
 
-	#quiz_definitions li {
-		padding-bottom: 15px;
-	}
+		li {
+			margin: 0px;
+			padding: 0px;
+		}
 
+		#quiz_definitions li {
+			padding-bottom: 15px;
+		}
+
+		#quiz_wordbank li {
+			padding-bottom: 8px;
+		}
+
+		h4 {
+			margin-top: 0px;
+			padding-top: 0px;
+		}
+		h2 {
+			text-align: center;
+		}
+		#container {
+			max-width: 710px;
+		}
+		#auth_hash {
+			margin: 0px;
+			padding: 0px;
+			font-size: 0px;
+		}
 	</style>
 
-	  	<div id="quiz_definitions">
-	  		<ol>
-				<% @defs_array.each do |definition| %>
-					<li><%= definition %></li>	
-				<% end %>
-	  		</ol>
-	  	</div>
-	  	<div id="quiz_wordbank">
-	  		<ul>
-	  			<% @words_array.each do |word| %>
-	  				<li><%= word %></li>
-	  			<% end %>
-	  		</ul>
-	  	</div>
+		<div id="container"><h2>Quiz for <%= Date.today.strftime("%A %b %-d, %Y") %></h2>
+		  	<div id="quiz_definitions">
+				<h4>Definitions</h4>
+		  		<ol>
+					<% @defs_array.each do |definition| %>
+						<li><%= definition %></li>	
+					<% end %>
+		  		</ol>
+		  	</div>
+		  	<div id="quiz_wordbank">
+		  		<h4>Word bank</h4>
+		  		<ol>
+		  			<% @words_array.each do |word| %>
+		  				<li><%= word %></li>
+		  			<% end %>
+		  		</ol>
+		  	</div>
+		</div>
+		<div id="auth_hash"><%= @quiz.auth_hash %></div>
 	</body>
 </html>
