@@ -61,7 +61,7 @@
 		  	<div id="quiz_definitions">
 				<h4>Definitions</h4>
 		  		<ol>
-					<% @defs_array.each do |definition| %>
+					<% @definitions_array.each do |definition| %>
 						<li><%= definition %></li>	
 					<% end %>
 		  		</ol>
@@ -69,12 +69,12 @@
 		  	<div id="quiz_wordbank">
 		  		<h4>Word bank</h4>
 		  		<ol>
-		  			<% @words_array.each do |word| %>
+		  			<% @shuffled_words_array.each do |word| %>
 		  				<li><%= word %></li>
 		  			<% end %>
 		  		</ol>
 		  	</div>
 		</div>
-		<div id="auth_hash"><%= @quiz.auth_hash %></div>
+		<div id="auth_hash">auth_hash:<%= @quiz.auth_hash %>:</div>
 	</body>
 </html>

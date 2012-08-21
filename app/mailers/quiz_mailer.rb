@@ -6,54 +6,58 @@ class QuizMailer < ActionMailer::Base
 	end
 
 	def quiz_email(user)
+
+		@answer_key_array = Array.new
+		@definitions_array = Array.new
+		@shuffled_words_array = Array.new
 		@quiz = user.quizzes.create
 
-		#better way to write this?
-		user_words = user.words.length
-		num_questions = (user_words < 5 ? user_words : 5)
+		num_user_words = user.words.length
+		num_questions = (num_user_words < 7 ? num_user_words : 7)
 
-		@words_array = Array.new
-		@defs_array = Array.new
+		create_quiz_questions(user, num_questions)
 
-		num_questions.times do
-			begin
-				word = user.words.sample
-			end while @words_array.include?(word.name)
-			@words_array.push(word.name)
-			@quiz.questions.create(word_id: word.id, style: "matching")
-		end
+		fetch_definitions
+		
+		@shuffled_words_array = @answer_key_array.shuffle
 
+		add_alpha_indices
 
-		@words_array.each do |word|
-			@defs_array.push(Wordnik.word.get_definitions(word)[0]['text'])
-		end
-
-		@quiz.update_attributes(answer_key: @words_array.join(","))
-
-		@words_array.shuffle!
+		@quiz.update_attributes(answer_key: @answer_key_array.join(","))
 
 		mail(to: user.email, subject: "Quiz #{user.quizzes.count} has arrived.")
-
-		# put the above logic in the quiz model	
-
-
-
-		#words_array = Array.new
-		#@quiz_hash = Hash.new 
-
-		#user.words.each do |word|
-		#	words_array.push(word.name)
-		#end
-
-		#if words_array.length > 5
-		#	5.times do
-		#		begin
-		#			word = words_array.sample
-		#		end while @quiz_hash[word]
-		#		definition = Wordnik.word.get_definitions(word)[0]['text']
-		#		@quiz_hash[word] = definition
-		#	end
-		#	mail(to: user.email, subject: "Your quiz, sir.")
-		#end
 	end
+
+	private
+
+		def create_quiz_questions(user, num)
+			num.times do
+				begin
+					word = user.words.sample
+				end while @answer_key_array.include?(word.name)
+				@answer_key_array.push(word.name)
+				@quiz.questions.create(word_id: word.id, style: "matching")
+			end
+		end
+
+		def fetch_definitions
+			@answer_key_array.each do |word|
+				@definitions_array.push(Wordnik.word.get_definitions(word)[0]['text'])
+			end
+		end
+
+		# prepends the correct alphabetical answer to the answer key array
+		# => before: ['jubilate', 'apostacy', 'bellwether', 'ubiquitous']
+		# => after: ['c:jubilate', 'a:apostacy', 'd:bellwether', 'b:ubiquitous']
+		def add_alpha_indices
+			@shuffled_words_array.each_with_index do |word, index|
+				alpha_index = (97+index).chr
+				add_alpha_index(word, alpha_index)
+			end
+		end
+
+		def add_alpha_index(word, alpha_index)
+			index = @answer_key_array.index(word)
+			@answer_key_array[index] = "#{alpha_index}:#{word}"
+		end
 end
