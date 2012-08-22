@@ -4,7 +4,7 @@ class IncomingEmailsController < ApplicationController
 
 	def create
 
-		body = params('body-plain')
+		body = params["body-plain"]
 
 		# find the auth_hash
 		if (match = body[/auth_hash:\h{64}:/])
@@ -14,7 +14,6 @@ class IncomingEmailsController < ApplicationController
 
 		# get array of questions
 		questions = Question.where(quiz_id: quiz.id)
-		num_questions = questions.count 
 
 		# get the answer_key_array into the form [['a', 'palindrome'], ['b', 'paradox'], ['c', 'psycho']] 
 		# => If I let the user answer with the word a two-dimensional array will be easier to navigate than a hash
@@ -24,7 +23,7 @@ class IncomingEmailsController < ApplicationController
 		end
 
 		# answers array with be in the form of ['a','b','c','d']
-		received_answers_array = parse_email(body, num_questions)
+		received_answers_array = parse_email(body, questions.count)
 		# get the received_answers_array into the form [['a', 'palindrome'], ['b', 'paradox'], ['c', 'psycho']] 
 		# => for the same reason as above
 		received_answers_array.each_with_index do |x, index|
@@ -47,7 +46,8 @@ class IncomingEmailsController < ApplicationController
 	end
 
 	def index
-		render text: "This is text. I have spoken."
+		#render text: "This is text. I have spoken."
+		render nothing: true
 	end
 
 	def parse_email(body, num_questions)

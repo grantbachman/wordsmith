@@ -1,5 +1,5 @@
 class QuizMailer < ActionMailer::Base
-  default from: "grantbachman@getwordsmith.com"
+  default from: "grantbachman@wordsmith.mailgun.org"
 
 	def welcome_email(user)
 		mail(to: user.email, subject: "Welcome to Wordsmith!")
