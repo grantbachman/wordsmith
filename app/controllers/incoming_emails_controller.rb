@@ -22,12 +22,12 @@ class IncomingEmailsController < ApplicationController
 			answer_key_array[index] = x.split(':')
 		end
 
-		# answers array with be in the form of ['a','b','c','d']
+		# answers array will be in the form of ['a','b','c','d']
 		received_answers_array = parse_email(body, questions.count)
 		# get the received_answers_array into the form [['a', 'palindrome'], ['b', 'paradox'], ['c', 'psycho']] 
 		# => for the same reason as above
 		received_answers_array.each_with_index do |x, index|
-			answer_key_array.each { |y| received_answers_array[index] = y if y[0] == x } 
+			answer_key_array.each { |y| (received_answers_array[index] = y) if (x == y[0]) } 
 		end
 
 		# Save results
