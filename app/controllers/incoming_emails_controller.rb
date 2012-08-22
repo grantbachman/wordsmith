@@ -4,7 +4,7 @@ class IncomingEmailsController < ApplicationController
 
 	def create
 
-		body = params(['stripped-text'])
+		body = params('body-plain')
 
 		# find the auth_hash
 		if (match = body[/auth_hash:\h{64}:/])
