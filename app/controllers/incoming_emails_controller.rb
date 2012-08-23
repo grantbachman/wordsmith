@@ -19,8 +19,14 @@ class IncomingEmailsController < ApplicationController
 		answer_key_array = quiz.answer_key.split(',')
 		answer_key_array.map! { |x| x = x.split(':') } 
 
+		# debug
+		@answer_key = answer_key_array
+
 		# answers array will be in the form of ['a','b','c','d']
 		received_answers_array = parse_email(body, num_questions)
+
+		# debug
+		@received = received_answers_array
 
 		received_answers_array.each_with_index do |x, index|
 			question = questions.find_by_word_id(quiz.user.words.find_by_name(answer_key_array[index][0]).id)	
@@ -31,11 +37,11 @@ class IncomingEmailsController < ApplicationController
 			#question.save
 		end
 
-		render nothing: true	
+
+		#render nothing: true	
 	end
 
 	def index
-		#render text: "This is text. I have spoken."
 		render nothing: true
 	end
 
