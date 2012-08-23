@@ -24,9 +24,11 @@ class IncomingEmailsController < ApplicationController
 
 		received_answers_array.each_with_index do |x, index|
 			question = questions.find_by_word_id(quiz.user.words.find_by_name(answer_key_array[index][0]).id)	
-			question.correct = x.in?(answer_key_array[index]) ? true : false
-			answer_key_array.each { |y| question.answer = y[0] if x.in?(y) }
-			question.save
+			question.update_attributes(correct: (x.in?(answer_key_array[index]) ? true : false ))
+			#question.correct = x.in?(answer_key_array[index]) ? true : false
+			answer_key_array.each { |y| question.update_attributes(answer: y[0]) if x.in?(y) }
+			#answer_key_array.each { |y| question.answer = y[0] if x.in?(y) }
+			#question.save
 		end
 
 		render nothing: true	
