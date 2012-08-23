@@ -15,30 +15,18 @@ class IncomingEmailsController < ApplicationController
 		# get array of questions
 		questions = Question.where(quiz_id: quiz.id)
 
-		# get the answer_key_array into the form [['a', 'palindrome'], ['b', 'paradox'], ['c', 'psycho']] 
+		# get the answer_key_array into the form [['palindrome', 'a'], ['paradox', 'b'], ['psycho', 'c']] 
 		# => If I let the user answer with the word a two-dimensional array will be easier to navigate than a hash
 		answer_key_array = quiz.answer_key.split(',')
-		answer_key_array.each_with_index do |x, index|
-			answer_key_array[index] = x.split(':')
-		end
+		answer_key_array.each_with_index { |x, index| answer_key_array[index] = x.split(':') } 
 
 		# answers array will be in the form of ['a','b','c','d']
 		received_answers_array = parse_email(body, questions.count)
-		# get the received_answers_array into the form [['a', 'palindrome'], ['b', 'paradox'], ['c', 'psycho']] 
-		# => for the same reason as above
-		received_answers_array.each_with_index do |x, index|
-			answer_key_array.each { |y| (received_answers_array[index] = y) if (x == y[0]) } 
-		end
 
-		# Save results
-		answer_key_array.each_with_index do |arr, index|
-			question = questions.where(word_id: Word.find_by_name(arr[1]).id).first
-			question.answer = received_answers_array[index][1]
-			if received_answers_array[index][1] == arr[1]
-				question.correct = true
-			else
-				question.correct = false
-			end
+		received_answers_array.each_with_index do |x, index|
+			question = questions.find_by_word_id(quiz.user.words.find_by_name(answer_key_array[index][0]))	
+			question.correct = x.in?(answer_key_array[index]) ? true : false
+			answer_key_array.each { |y| question.answer = y[0] if x.in?(y) }
 			question.save
 		end
 

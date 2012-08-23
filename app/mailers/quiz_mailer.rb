@@ -46,9 +46,9 @@ class QuizMailer < ActionMailer::Base
 			end
 		end
 
-		# prepends the correct alphabetical answer to the answer key array
+		# appends the correct alphabetical answer to the answer key array
 		# => before: ['jubilate', 'apostacy', 'bellwether', 'ubiquitous']
-		# => after: ['c:jubilate', 'a:apostacy', 'd:bellwether', 'b:ubiquitous']
+		# => after: ['jubilate:c', 'apostacy:a', 'bellwether:d', 'ubiquitous:b']
 		def add_alpha_indices
 			@shuffled_words_array.each_with_index do |word, index|
 				alpha_index = (97+index).chr
@@ -58,6 +58,6 @@ class QuizMailer < ActionMailer::Base
 
 		def add_alpha_index(word, alpha_index)
 			index = @answer_key_array.index(word)
-			@answer_key_array[index] = "#{alpha_index}:#{word}"
+			@answer_key_array[index] = "#{word}:#{alpha_index}"
 		end
 end
