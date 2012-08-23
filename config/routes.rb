@@ -1,5 +1,7 @@
 Wordsmith::Application.routes.draw do
 
+  get "quizzes/show"
+
   devise_for :users#, prefix: 'd'
 	resources :users, only: [:show]
   resources :words

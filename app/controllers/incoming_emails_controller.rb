@@ -13,7 +13,7 @@ class IncomingEmailsController < ApplicationController
 		quiz = Quiz.find_by_auth_hash(auth_hash)
 
 		# get array of questions
-		questions = Question.where(quiz_id: quiz.id)
+		questions = quiz.questions 
 
 		# get the answer_key_array into the form [['palindrome', 'a'], ['paradox', 'b'], ['psycho', 'c']] 
 		# => If I let the user answer with the word a two-dimensional array will be easier to navigate than a hash
