@@ -1,8 +1,19 @@
-Answer Key:
-<%= @answer_key %>
+Received Answers: <%= @received_answers_array %><br /><br />
+Answer Key: <%= @answer_key_array %><br /><br />
+
+Questions: <br />
+<% @questions.each do |x| %>
+	ID: <%= x.id %>,
+	Answer: <%= x.answer %>
+	Correct? <%= x.correct %><br />
+<% end %>
 <br />
 <br />
 <br />
 
-Received:
-<%= @received %>
+Temp: <br />
+<% @temp.each do |x| %>
+	Question: <%= x.id %>, 
+	Answer: <%= x.answer %>,
+	Correct? <%= x.correct %><br />
+<% end %>

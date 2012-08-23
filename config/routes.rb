@@ -6,7 +6,7 @@ Wordsmith::Application.routes.draw do
 	resources :users, only: [:show]
   resources :words
 	resources :quizzes
-	resources :incoming_emails, only: [:create,:index]
+	resources :incoming_emails, only: [:new,:create,:index]
 
 	authenticated :user do
     root to: 'words#new'
