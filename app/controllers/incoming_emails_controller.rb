@@ -11,34 +11,32 @@ class IncomingEmailsController < ApplicationController
 			auth_hash = match[-65..-2]
 		end
 		quiz = Quiz.find_by_auth_hash(auth_hash)
+
+		# get array of questions
 		questions = quiz.questions
-		num_questions = questions.count
 
 		# get the answer_key_array into the form [['palindrome', 'a'], ['paradox', 'b'], ['psycho', 'c']] 
 		# => If I let the user answer with the word a two-dimensional array will be easier to navigate than a hash
 		answer_key_array = quiz.answer_key.split(',')
-		answer_key_array.map! { |x| x = x.split(':') } 
+		answer_key_array.map! { |x| x = x.split(':') }
 
-		# debug
-		@answer_key = answer_key_array
 
 		# answers array will be in the form of ['a','b','c','d']
-		received_answers_array = parse_email(body, num_questions)
+		#received_answers_array = parse_email(body, @questions.count)
+		received_answers_array = parse_email(body, questions.count)
 
-		# debug
-		@received = received_answers_array
 
 		received_answers_array.each_with_index do |x, index|
-			question = questions.find_by_word_id(quiz.user.words.find_by_name(answer_key_array[index][0]).id)	
-			question.update_attributes(correct: (x.in?(answer_key_array[index]) ? true : false ))
-			#question.correct = x.in?(answer_key_array[index]) ? true : false
-			answer_key_array.each { |y| question.update_attributes(answer: y[0]) if x.in?(y) }
-			#answer_key_array.each { |y| question.answer = y[0] if x.in?(y) }
-			#question.save
+			question = questions.find_by_word_id(quiz.user.words.find_by_name(answer_key_array[index][0]).id)
+			question.correct = x.in?(answer_key_array[index]) ? true : false
+			answer_key_array.each { |y| question.answer = y[0] if x.in?(y) }
+			question.save!
 		end
 
+		render nothing: true
+	end
 
-		#render nothing: true	
+	def new	
 	end
 
 	def index
@@ -50,11 +48,8 @@ class IncomingEmailsController < ApplicationController
 		if (match = body[/(\d\s?\.?\s?[a-zA-Z]\s?,\s?){#{num_questions-1}}(\d\s?\.?\s?[a-zA-Z]\s?){1}/])
 			match.gsub!('.','')
 			match.gsub!(' ','')
-			match.gsub!('/\d/','')
-			returned_answers = match.split(',')	
-			return returned_answers
-		else
-			return ['a','b','c','d','e','f','g']
+			match.gsub!(/\d/,'')
+			return match.split(',')	
 		end
 	end		
 

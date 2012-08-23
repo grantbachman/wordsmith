@@ -1,9 +1,7 @@
 <h1>Results for Quiz #<%= @quiz.id %></h1>
+Auth Hash: <%= @quiz.auth_hash %>
+<br />
+<br />
 <% @questions.each do |x| %>
 	Answer: <%= x.answer %>, Correct: <%= x.correct %><br />
 <% end %>
-<br />
-<br />
-<br />
-
-<%= @questions %>

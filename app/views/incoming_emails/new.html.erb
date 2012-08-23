@@ -1,0 +1,5 @@
+<%= form_tag('/incoming_emails') do %>
+<div>Auth Hash: <%= text_field_tag('auth_hash') %></div>
+<div>Answers: <%= text_field_tag('body-plain') %></div>
+<div><%= submit_tag 'Incoming!' %></div>
+<% end %>
