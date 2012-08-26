@@ -5,7 +5,6 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 # gdb Ignore my password file
-/config/my_secrets.yml
 /config/initializers/gdb.rb
 .env
 
