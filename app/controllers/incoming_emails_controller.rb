@@ -32,7 +32,13 @@ class IncomingEmailsController < ApplicationController
 		received_hash.each do |key, value|
 			if question = questions.find_by_number(key)	
 				question.correct = value.in?(answer_key_array[key - 1]) ? true : false
-				question.answer = value
+				if question.correct
+					question.answer = answer_key_array[key - 1][0]
+				else # Look for the answer
+					answer_key_array.each { |x| question.answer = x[0] if value.in?(x) }
+					# Set answer to their response if we can't locate it within the answers array
+					question.answer ||= value 
+				end
 				question.save!
 			end
 		end
