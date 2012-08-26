@@ -31,12 +31,12 @@ class QuizMailer < ActionMailer::Base
 	private
 
 		def create_quiz_questions(user, num)
-			num.times do
+			num.times do |counter|
 				begin
 					word = user.words.sample
 				end while @answer_key_array.include?(word.name)
 				@answer_key_array.push(word.name)
-				@quiz.questions.create(word_id: word.id, style: "matching")
+				@quiz.questions.create(number: counter+1, word_id: word.id, style: "matching")
 			end
 		end
 
