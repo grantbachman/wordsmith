@@ -10,6 +10,7 @@
 #  correct    :boolean
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  number     :integer
 #
 
 require 'spec_helper'
@@ -21,18 +22,24 @@ describe Question do
 
 
 	before(:each) do
-		@question = quiz.questions.build(style: "matching", word_id: word)
+		@question = quiz.questions.build(number: 1, style: "matching", word_id: word)
 	end
 
 	subject { @question }
 
 	it { should respond_to(:quiz) }
+	it { should respond_to(:number) }
 	it { should respond_to(:word) }
 	it { should respond_to(:style) }
 	it { should respond_to(:answer) }
 	it { should respond_to(:correct) }
 	its(:quiz) { should == quiz }
 	it { should be_valid }
+
+	describe "when number is not present" do
+		before(:each) { @question.number = nil }
+		it { should_not be_valid }
+	end
 
 	describe "when style is not present" do
 		before(:each) { @question.style = nil }
