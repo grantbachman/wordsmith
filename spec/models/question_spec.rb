@@ -6,7 +6,7 @@
 #  quiz_id    :integer
 #  word_id    :integer
 #  style      :string(255)
-#  answer     :string(255)
+#  response   :string(255)
 #  correct    :boolean
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
@@ -31,7 +31,7 @@ describe Question do
 	it { should respond_to(:number) }
 	it { should respond_to(:word) }
 	it { should respond_to(:style) }
-	it { should respond_to(:answer) }
+	it { should respond_to(:response) }
 	it { should respond_to(:correct) }
 	its(:quiz) { should == quiz }
 	it { should be_valid }
