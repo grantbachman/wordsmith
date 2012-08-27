@@ -1,13 +1,13 @@
 module ApplicationHelper
 
-# Devise helpers
+	# Devise helpers
 
-def resource
-	@resource ||= User.new
-end
+	def resource
+		@resource ||= User.new
+	end
 
-def resource_name
-	:user
-end
+	def resource_name
+		:user
+	end
 
 end
