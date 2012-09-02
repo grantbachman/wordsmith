@@ -7,6 +7,7 @@
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #  user_id    :integer
+#  definition :string(255)
 #
 
 require 'spec_helper'
@@ -20,6 +21,7 @@ describe Word do
 	
 	it { should respond_to (:questions) }
 	it { should respond_to(:name) }
+	it { should respond_to(:definition)}
 	it { should respond_to(:user_id) }
 	it { should respond_to(:user) }
 	its(:user) { should == user }

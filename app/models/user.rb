@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-	has_many :words
-	has_many :quizzes
+	has_many :words, :dependent => :destroy
+	has_many :quizzes, :dependent => :destroy
 
 end

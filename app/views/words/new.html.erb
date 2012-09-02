@@ -4,7 +4,3 @@
 	<%= f.text_field :name, placeholder: "Add a word" %>	
 	<%= f.submit "Add", class: "btn btn-primary" %>
 <% end %>
-
-<% @words.each do |word| %>
-	<%= word.name %><br />
-<% end %>

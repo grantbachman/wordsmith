@@ -4,12 +4,16 @@ Wordsmith::Application.routes.draw do
 
   devise_for :users#, prefix: 'd'
 	resources :users, only: [:show]
-  resources :words
+
+  resources :words do
+    get 'get_definition', on: :collection
+  end
+
 	resources :quizzes
 	resources :incoming_emails, only: [:new,:create,:index]
 
 	authenticated :user do
-    root to: 'words#new'
+    root to: 'words#index'
 	end
 
 	root to: 'static_pages#index'

@@ -1,31 +1,54 @@
 class WordsController < ApplicationController
 	before_filter :authenticate_user!
 
-	def new
+	def index
+		@words = Word.where(user_id: current_user)
 		@word = current_user.words.new
-		@words = current_user.words.all
+		@defs = Array.new
+	end
+
+	def new
 	end
 
 	def create
-		@words = current_user.words.all
-		@word = current_user.words.build(params[:word])
+		@words = Word.where(user_id: current_user)
+		@word = current_user.words.build
+		@word.name = params['word_name']
+		@word.definition = params['word_definition']
 		@word.name.downcase!
-		@theWord = Wordnik.word.get_definitions(params[:word][:name])
-		if @theWord.blank?
-			flash[:error] = "That isn't a real word to our knowledge..."
-			render 'new'
-		else
+		#@defs = Wordnik.word.get_definitions(@word.name)
+		#if @defs.blank? # change this to handle nonwords with "did you mean..." 
+		#	flash.now[:error] = "That isn't a real word to our knowledge..."
+#		else
 			if @word.save
-				flash[:success] = "Word added"
-				if current_user.words.length > 5
-					QuizMailer.quiz_email(current_user).deliver
-				end
-				redirect_to root_path
+				flash.now[:success] = "Word added. You'll be quizzed on it soon."
+				#QuizMailer.quiz_email(current_user).deliver
 			else
-				flash[:error] = @word.errors.full_messages[0]
-				render 'new'
+				flash.now[:error] = @word.errors.full_messages[0]
 			end
+
+		#end
+		render nothing: true
+	end
+
+	def show
+		render nothing: true
+	end
+
+	def get_definition
+		@defs = Wordnik.word.get_definitions(params['word'])
+		wordTaken = Word.where(user_id: current_user, name: params['word']).present?
+
+		if @defs.empty?
+			render json: { "error" => 'I don\'t think this is a real word...' }.to_json
+		elsif wordTaken
+			render json: { "notice" => 'You already have this word in your list' }.to_json
+		elsif @defs 
+			render json: @defs
 		end
+		#@returnValues = @defs.map { |x| x['text'] }
+		#render text: @returnValues
+
 	end
 
 end

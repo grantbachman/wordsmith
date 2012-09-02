@@ -5,16 +5,20 @@ header {
 	width: 100%;
 	/* why is there 20px of extra space to the right if the min-width is 940px? */
 	min-width: 960px;
-	background-color: #2c2c2c;
-	height: 45px;
+	#background-color: #2c2c2c;
+	height: 50px;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+	border-bottom-color: lightgrey;
 
 	#logo {
 		float: left;
-		font-size: 2.7em;
-		color: white;
+		font-size: 3em;
+		color: #2c2c2c;
+		#color: white;
 		#text-transform: uppercase;
 		letter-spacing: -1px;
-		padding-top: 4px;
+		padding-top: 6px;
 		font-weight: bold;
 		line-height: 1;
 		&:hover {
@@ -32,16 +36,18 @@ header {
 	}
 
 	#navNavLinks {
-		margin-top: 4px;
+		margin-top: 7px;
 		float: right;
 		list-style-type: none;
 		li {
 			float: left;
 			padding-left: 15px;
 			a {
-				color: #aaa;
+				#color: #aaa;
+				font-size: 1.2em;
 				&:hover {
-					color: white;
+					#color: white;
+					color: black;
 					text-decoration: none;
 				}
 			}	
@@ -101,3 +107,55 @@ header {
 .field_with_errors {
 	display: inline;
 }
+
+/* Change Placeholder text */
+input#word_name::-webkit-input-placeholder { padding-top: 6px; }
+input#word_name:-moz-placeholder{ padding-top: 6px;}
+
+input#word_name {
+	font-size: 26px;	
+	padding: 10px;
+	#height: 30px;
+	width: 250px;
+	text-align: middle;
+}
+
+#findWord {
+	width: 75%;
+	text-align: center; 
+	margin-top: 75px;
+	margin-left: auto;
+	margin-right: auto;
+
+	#fieldAndErrorsContainer {
+		margin-left: auto;
+		margin-right: auto;
+		width: 272px;
+		margin-bottom: 0px;
+		.alert-error, .alert-notice, .alert-success{
+			margin-bottom: 10px;
+		}
+	}
+	#addDefinitionContainer {
+		font-size: 20px;
+		line-height: 1.2em;
+		text-align: left;
+		.single_definition {
+			margin-bottom: 15px;
+		}
+	}
+}
+
+input[type=submit] {
+	display: none;
+}
+
+/*
+input[type=checkbox] {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+	opacity: 0;
+}
+*/
+

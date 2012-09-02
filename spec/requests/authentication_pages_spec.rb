@@ -74,10 +74,10 @@ describe "Authentication" do
 			response.should render_template('static_pages/index')
 		end
 
-		it "should root to words#new when logged in" do
+		it "should root to words#index when logged in" do
 			login(user) # function in spec/support/utilities.rb 
 			get root_path
-			response.should render_template('words/new')
+			response.should render_template('words/')
 		end
 	end
 

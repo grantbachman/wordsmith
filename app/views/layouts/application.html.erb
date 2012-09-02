@@ -29,10 +29,8 @@
 		</div>
 	</header>
 <div id="main">
-	<% unless (params[:controller] == 'devise/sessions' || params[:controller] == 'devise/registrations') && (params[:action] == 'create') %>
-		<% flash.each do |key, value| %>
-			<div class="alert alert-<%= key %>"><%= value %></div>
-		<% end %>
+	<% unless (params[:controller].in?(['devise/sessions','devise/registrations'])) %>
+		<%= render 'shared/flash_messages' %>
 	<% end %>
 
 	<%= yield %>
