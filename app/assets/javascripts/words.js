@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+if($('#findWord').length > 0){
 	var searchedWord = getWord();
 	var open = false; // if the form isn't in it's original state
 
@@ -146,4 +147,5 @@ $(document).ready(function(){
 				success: checkResults,
 		});
 	};
+}
 })
