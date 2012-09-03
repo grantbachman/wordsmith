@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require addWord
+//= require words
 
 $(document).ready(function(){
 	$(".flash_message").delay(2000).slideUp('slow');
