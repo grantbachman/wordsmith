@@ -1,8 +1,8 @@
 <div id="navLoginForm">
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 			<span id="loginFields">
-				<%= f.email_field :email, placeholder: "Email", class: "input-small" %>
-				<%= f.password_field :password, placeholder: "Password", class: "input-small" %>
+				<%= f.email_field :email, placeholder: "Email", class: "input-medium" %>
+				<%= f.password_field :password, placeholder: "Password", class: "input-medium" %>
 				<%= f.check_box :remember_me, checked: true, style: 'display: none' %>
 			</span>
 		<%= f.submit "Log in", class: "btn" %>

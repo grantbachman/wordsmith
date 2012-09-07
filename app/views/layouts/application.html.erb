@@ -9,7 +9,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body id="body">
 	<header>
 		<div class="container">
 			<%= link_to "wordsmith", root_path, id: "logo" %> 
@@ -28,13 +28,18 @@
 			<%#= render 'layouts/header' %>
 		</div>
 	</header>
-<div id="main">
-	<% unless (params[:controller].in?(['devise/sessions','devise/registrations'])) %>
-		<%= render 'shared/flash_messages' %>
-	<% end %>
+<div id="main" class="row-fluid">
+	<div class="span12">
+		<% unless (params[:controller].in?(['devise/sessions','devise/registrations'])) %>
+			<%#= render 'shared/flash_messages' %>
+		<% end %>
 
-	<%= yield %>
-	<%= debug(params) if Rails.env.development? %>
+		<%= yield %>
+		<%#= debug(params) if Rails.env.development? %>
+	</div>
+<footer>
+	<%= render 'shared/footer' %>
+</footer>
 </div>
 </body>
 </html>

@@ -1,24 +1,37 @@
 @import "bootstrap";
 
-header {
+body#body {
+	font-size: 12pt;
+	h1,h2 {
+		margin-bottom: 8px;
+	}
+}
 
+.center {
+	text-align: center;	
+}
+.centerDiv {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header {
 	width: 100%;
-	/* why is there 20px of extra space to the right if the min-width is 940px? */
 	min-width: 960px;
 	#background-color: #2c2c2c;
 	height: 50px;
 	border-bottom-style: dashed;
 	border-bottom-width: 1px;
-	border-bottom-color: lightgrey;
+	border-bottom-color: darkgrey;
 
 	#logo {
 		float: left;
-		font-size: 3em;
+		font-size: 2.7em;
 		color: #2c2c2c;
 		#color: white;
 		#text-transform: uppercase;
 		letter-spacing: -1px;
-		padding-top: 6px;
+		padding-top: 5px;
 		font-weight: bold;
 		line-height: 1;
 		&:hover {
@@ -27,11 +40,27 @@ header {
 	}
 
 	#navLoginForm {
+		margin-top: 1px;
 		float: right;
+		height: 40px;
 
 		#loginFields {
 			float: left;
-			width: 208px;
+
+			input {
+				font-size: 14px;	
+				#font-weight: bold;
+				padding: 3px;
+				height: 22px;
+				width: 120px;
+			}
+		}
+		input[type="submit"] {
+			font-size: 14px;
+			font-weight: bold;
+			margin-left: 4px;
+			width: 70px;
+			height: 29px;
 		}
 	}
 
@@ -44,7 +73,6 @@ header {
 			padding-left: 15px;
 			a {
 				#color: #aaa;
-				font-size: 1.2em;
 				&:hover {
 					#color: white;
 					color: black;
@@ -55,52 +83,41 @@ header {
 	}
 }
 
-#main {
-	margin-top: 20px;
-	width: 940px;
+.centerDiv {
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#mainForm {
-	width: 210px;
-	margin: auto auto;
-	.input-medium {
-		width: 200px;
-	}
-	#rememberMe {
-		padding-left: 4px;
-		vertical-align: bottom;
-	}
-
-	.btn-primary {
-		margin-top: 8px;
-		width: 210px;
-	}
-	.alert-error {
-		padding-left: 0px;
-		padding-right: 0px;
-		padding-bottom: 0px;
-	}
-	.center {
-		text-align: center;	
+.centerHeading {
+	h1,h2,h3,h4,h5,h6 {
+		text-align: center;
 	}
 }
 
-#indexLeft {
-	position: relative;
-	float: left;
-	width: 470px;
+#main {
+	margin-top: 40px;
+	width: 940px;
+	margin-left: auto;
+	margin-right: auto;
 }
-
-#indexRight {
-	position: relative;
-	float: left;
-	width: 470px;
+.registerLogin {
+	input[type="email"],input[type="text"],input[type="password"] {
+		font-size: 14px;	
+		#font-weight: bold;
+		padding: 3px;
+		height: 22px;
+		width: 254px;
+	}
+}
+.registerLogin .alert-error {
+	ul {
+		margin-bottom: 0px;
+	}
+	margin-right: -12px;
 }
 
 .debug_dump {
-	width: 940px;
+	width: 100%;
 	float: left;
 }
 
@@ -121,14 +138,13 @@ input#word_name {
 }
 
 #findWord {
-	width: 75%;
+	width: 50%;
 	text-align: center; 
-	margin-top: 75px;
+	margin-top: 40px;
 	margin-left: auto;
 	margin-right: auto;
-
-	input[type=submit] { display: none; width: 272px; }
-	button[type=button] { width: 272px; }
+	input[type=submit] { font-size: 14pt; display: none; height: 35px; width: 272px; }
+	button[type=button] { font-size: 14pt; height: 35px; width: 272px; }
 
 	#fieldAndErrorsContainer {
 		margin-left: auto;
@@ -144,18 +160,36 @@ input#word_name {
 		line-height: 1.2em;
 		text-align: left;
 		display: none;
-		.single_definition {
-			margin-bottom: 15px;
+		ul {
+			list-style-type: none;
+			position: inline;
+			li {
+				margin-bottom: 2px;
+				label {
+					padding: 10px;
+				}
+				label:hover {
+					background-color: #D1FFCC;
+				}
+			}
 		}
 	}
 }
 
-/*
-input[type=checkbox] {
+#addDefinitionContainer input[type=checkbox] {
 	position: absolute;
 	top: -9999px;
 	left: -9999px;
 	opacity: 0;
 }
-*/
 
+.greenBackground {
+	background-color: lightgreen;
+}
+
+
+footer {
+	float: left;
+	margin-top: 80px;
+	width: 100%;
+}

@@ -1,3 +1,63 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#indexLeft {
+	width: 370px;
+	float: left;	
+	#background-color: lightblue; 
+}
+
+#blurb {
+	float: left;
+	#margin-left: auto;
+	#margin-right: auto;
+	width: 500px;
+}
+
+#divider {
+	width: 40px;
+	float: left;	
+	#background-color: lightgrey;
+
+}
+#indexRight {
+	width: 530px;	
+	float: right;
+	#background-color: pink;
+	h1 {
+		line-height: 120%;
+		font-size: 36pt;
+		text-align: center;
+	}
+}
+
+
+.registerLogin {
+	#background-color: green;
+	margin-left: auto;
+	margin-right: auto;
+	width: 250px;
+	input[type="submit"] {
+		font-size: 12pt;
+		font-weight: bold;
+		width: 260px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+}
+
+.alreadyRegistered {
+	font-size: 13pt;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#rememberMe {
+	padding-top: 4px;
+	padding-bottom: 10px;	
+	input[type="checkbox"] {
+		margin-top: -2px;
+		margin-right: 6px;
+	}
+}

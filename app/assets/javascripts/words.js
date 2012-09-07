@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-if($('#findWord').length > 0){
+if($('#findWord').length > 0){ // Make sure the js only executes on the add_word page
 	var searchedWord = getWord();
 	var open = false; // if the form isn't in it's original state
 
@@ -24,7 +24,7 @@ if($('#findWord').length > 0){
 
 	function rollUp(){
 		$('#addDefinitionContainer').slideUp('slow');
-		$('.single_definition').remove();	
+		$('div#addDefinitionContainer li').remove();	
 		open = false;
 	}
 	function isSubmittable(){
@@ -34,7 +34,7 @@ if($('#findWord').length > 0){
 			return false;
 		}
 	}
-
+	// They are changing their searched word
 	$('input#word_name').keyup(function(e){
 		if(open && e.keyCode != 13) {
 			rollUp();
@@ -44,65 +44,60 @@ if($('#findWord').length > 0){
 	});
 	$('button#findDefinitions').click(function(){
 		if(getWord() != ''){
-			clearFlash();
+			clearFlash(); // Predominantly for the Success flash
 			ajaxCall(getWord());	
 			searchedWord = getWord();
 		}
 	})
-	$('input[type=submit]').click(function(e){
-		if(!isSubmittable()){
-			e.preventDefault();
-			return false;
-		}else{
+	$('input[type="submit"]').click(function(e){
+		if(isSubmittable()){
 			$('form').serialize();
 			$('form').submit();
 			rollUp();
 			revertButtons();
-			var data = { 'success': "Word successfully saved." };
+			var data = { 'success': "\'" + getWord() + "\' successfully saved." };
 			printFlash(data);
+			$("input#word_name").val('');
 		}	
+		e.preventDefault();
+		return false;
 	})
 
 	$(window).keydown(function(e){
-		if(e.keyCode == 13){	
+		if(e.keyCode == 13){
+			// If they are hitting 'find definitions' button (with enter key)
 			if(!isSubmittable()){
-				searchedWord = getWord();
-				if(!open){
-					if(getWord() != ''){
-						clearFlash();
-						open = false;
-						ajaxCall(getWord());	
-					}	
-				}else{ // it's open
-					if(getWord() != searchedWord){
-						clearFlash();
-						open = false;
-						ajaxCall(getWord());	
-					}	
-				}
-				e.preventDefault();
-				return false;
-			}else{
+					if(open){ rollUp(); }	
+					clearFlash();
+					ajaxCall(getWord());
+					searchedWord = getWord();	
+			}else{ // They are submitting the form
 				$('form').serialize();
 				$('form').submit();
-				rollUp();
-				revertButtons();
-				var data = { 'success': "Word successfully saved." };
-				printFlash(data);			
+				rollup();
+				revertbuttons();
+				var data = { 'success': "\'" + getword() + "\' successfully saved." };
+				printflash(data);			
+				$("input#word_name").val('');
 			}
+			// Regardless, prevent the default submission of the form since
+			// I'm doing an ajax submit
+			e.preventDefault();
+			return false;
 		}
 	});
 
 
 	function addDefsToForm(data){
 		$.each(data, function(index,item){
-			var radio = $('<input />', { 	id: 'word_definition_'+index,
+			if(index > 4){ return false; }
+			var checkbox = $('<input />', { id: 'word_definition_'+index,
 											class: 'checkbox',
 											name: 'word_definition[]',
 											type: 'checkbox',
 											value: item['text'],
-										}).wrap('<label />').parent().appendTo("#addDefinitionContainer")
-			$('label').last().wrap('<div class="single_definition" />')
+										}).wrap('<label />').parent().appendTo("#addDefinitionContainer ul")
+			$('label').last().wrap('<li />')
 			$('label').last().append(item['text']);
 		});
 		$('#addDefinitionContainer').slideDown('slow');
@@ -147,5 +142,15 @@ if($('#findWord').length > 0){
 				success: checkResults,
 		});
 	};
+	$('body').change(function(event){ // Use event bubbling because these elements were dynamically generated
+		if($(event.target).is('input[name^="word_definition"][type="checkbox"]')){
+			if($(event.target).is(":checked")){
+				$(event.target).parent().parent().addClass("greenBackground");
+			} else {
+				$(event.target).parent().parent().removeClass("greenBackground");
+			}
+		}
+	})
+
 }
 })

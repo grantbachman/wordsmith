@@ -16,6 +16,8 @@ Wordsmith::Application.routes.draw do
     root to: 'words#index'
 	end
 
+  match 'about' => "static_pages#about"
+
 	root to: 'static_pages#index'
 
 	#match '/profile', to: "users#show"
