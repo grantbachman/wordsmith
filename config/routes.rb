@@ -13,7 +13,8 @@ Wordsmith::Application.routes.draw do
 	resources :incoming_emails, only: [:new,:create,:index]
 
 	authenticated :user do
-    root to: 'words#index'
+    root to: 'words#new'
+    #root to: 'words#index'
 	end
 
   match 'about' => "static_pages#about"

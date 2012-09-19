@@ -1,0 +1,26 @@
+<div id="editWord">
+		<%= form_tag "/words/#{@word.id}", method: :put, html: { class: "form-inline", id: "addWordForm" } do %>
+		<div id="fieldAndErrorsContainer">
+			<%= text_field_tag 'word_name', @word.name, tabindex: 1, disabled: true %>
+		</div>
+
+	<div id="addDefinitionContainer">
+		<ul>
+			<% @defs[0..4].each do |definition| %>
+				<li>
+					<label>
+						<div class="checkmark"></div>
+						<% checked = (@myDefs.include?(definition['text']) ? true : false) %>
+						<%= check_box_tag 'word_definition', definition['text'], checked, name: "word_definition[]" %> 
+						<div class="checkmarkText"><%= definition['text'] %></div>
+					</label>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="submitButton">
+		<%#= button_tag "Find definitions", class: 'btn',id: "findDefinitions", type: 'button', tabindex: 2 %>
+		<%= submit_tag "Save word and definitions", class: "btn btn-primary", tabindex: 3 %>
+	</div>
+	<% end %>
+</div>

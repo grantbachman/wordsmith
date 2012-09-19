@@ -1,7 +1,7 @@
 <div class="word_list">
 	<ul>
 		<% @words.each do |word| %>
-			<li><%= word.name %></li>
+		<li><%= link_to word.name, word_path(word.id) %></li>
 		<% end %>
 	</ul>
 </div>

@@ -1,0 +1,8 @@
+<h1><%= @word.name %></h1>
+
+<ul>
+<% @word.definitions.each do |definition| %>
+	<li><%= definition.text %></li>
+<% end %>
+</ul>
+<%= link_to "Edit Definitions", edit_word_path(@word.id) %>

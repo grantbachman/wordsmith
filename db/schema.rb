@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829141215) do
+ActiveRecord::Schema.define(:version => 20120915040928) do
+
+  create_table "definitions", :force => true do |t|
+    t.integer  "word_id"
+    t.string   "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
@@ -55,7 +62,6 @@ ActiveRecord::Schema.define(:version => 20120829141215) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.string   "definition"
   end
 
   add_index "words", ["user_id"], :name => "index_words_on_user_id"

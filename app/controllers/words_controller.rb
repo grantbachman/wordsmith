@@ -1,6 +1,10 @@
 class WordsController < ApplicationController
 	before_filter :authenticate_user!
 
+	def show
+		@word = current_user.words.find_by_id(params[:id])
+	end
+
 	def index
 		@words = Word.where(user_id: current_user)
 		@word = current_user.words.new
@@ -8,31 +12,57 @@ class WordsController < ApplicationController
 	end
 
 	def new
+		@words = Word.where(user_id: current_user)
+		@word = current_user.words.new
+		@defs = Array.new
 	end
 
 	def create
 		@words = Word.where(user_id: current_user)
 		@word = current_user.words.build
 		@word.name = params['word_name']
-		@word.definition = params['word_definition']
 		@word.name.downcase!
-		#@defs = Wordnik.word.get_definitions(@word.name)
-		#if @defs.blank? # change this to handle nonwords with "did you mean..." 
-		#	flash.now[:error] = "That isn't a real word to our knowledge..."
-#		else
-			if @word.save
-				flash.now[:success] = "Word added. You'll be quizzed on it soon."
-				#QuizMailer.quiz_email(current_user).deliver
-			else
-				flash.now[:error] = @word.errors.full_messages[0]
+		numDefs = 0
+		if @word.save!
+			params['word_definition'].each do |definition|
+				if @word.definitions.create(text: definition)
+					numDefs += 1
+				end
 			end
-
-		#end
-		render nothing: true
+			respond_to do |format|
+				if numDefs > 0	
+					format.js { render action: "success" }
+				end
+			end
+		else
+			format.js { render action: "failure" }
+		end
 	end
 
-	def show
-		render nothing: true
+	def edit
+		@word = current_user.words.find_by_id(params[:id])
+		@defs = Wordnik.word.get_definitions(@word.name) 
+		@myDefs = @word.definitions.map { |x| x.text }
+	end
+
+	def update
+		@word = current_user.words.find_by_id(params[:id])
+		if params['word_definition'].blank?
+			flash[:error] = "A word must have at least one definition." 
+			redirect_to edit_word_path(@word.id)
+		else
+			@word.definitions.destroy_all	
+			params['word_definition'].each do |definition|
+				@word.definitions.create(text: definition)
+			end
+			if @word.save
+				flash[:success] = "'#{@word.name}' has been updated."
+				redirect_to word_path(@word.id)
+			end
+		end
+
+		#@@word = Word.find_by_id(params['word_id'])
+		#@word.update_attributes(definition: params['word_definition'])
 	end
 
 	def get_definition

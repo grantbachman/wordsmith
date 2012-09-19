@@ -12,10 +12,11 @@
 
 class Word < ActiveRecord::Base
 
-  	attr_accessible :name
+  	attr_accessible :name, :definition
 	
 	belongs_to :user
 	has_many :questions, :dependent => :destroy
+	has_many :definitions, :dependent => :destroy
 
 	validates :user_id, presence: true
 	validates :name, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }

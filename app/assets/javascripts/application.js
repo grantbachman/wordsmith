@@ -17,4 +17,5 @@
 
 $(document).ready(function(){
 	$(".flash_message").delay(2000).slideUp('slow');
+
 });
