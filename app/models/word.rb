@@ -7,12 +7,13 @@
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #  user_id    :integer
-#  definition :string(255)
+#  deleted    :boolean
 #
 
 class Word < ActiveRecord::Base
 
-  	attr_accessible :name, :definition
+  	attr_accessible :name, :definition, :deleted
+  	default_scope where(deleted: false)
 	
 	belongs_to :user
 	has_many :questions, :dependent => :destroy

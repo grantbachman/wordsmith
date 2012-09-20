@@ -212,6 +212,7 @@ label {
 	background-position: -30px 0px;
 }
 
+
 .word_list {
 	
 	width: 20%;
@@ -227,6 +228,33 @@ label {
 		}
 	}
 }
+
+/* Word 'show' page */
+
+ul#word_definitions {
+	#list-style-type: none;
+	#margin-left: 10px;
+	li {
+		margin-top: 5px;
+	}
+}
+
+#word_options {
+
+	input[type=submit] { font-size: 11pt; }
+
+	ul {
+		list-style-type: none;
+		margin-left: 0px;
+		li {
+			float: left;
+			margin-right: 15px;
+		}
+	}
+	margin-top: 40px;
+}
+
+/* end Word 'show' page */
 
 footer {
 	float: left;

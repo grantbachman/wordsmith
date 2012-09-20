@@ -65,6 +65,13 @@ class WordsController < ApplicationController
 		#@word.update_attributes(definition: params['word_definition'])
 	end
 
+	def destroy
+		@word = current_user.words.find_by_id(params[:id])
+		@word.update_attributes(deleted: true)
+		flash[:success] = "Word deleted."
+		redirect_to words_path
+	end
+
 	def get_definition
 		@defs = Wordnik.word.get_definitions(params['word'])
 		wordTaken = Word.where(user_id: current_user, name: params['word']).present?
