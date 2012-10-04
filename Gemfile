@@ -8,6 +8,7 @@ gem 'thin', '1.4.1'
 gem 'foreman', '0.53.0'
 gem 'premailer-rails3', '1.3.1'
 gem 'nokogiri', '1.5.3' # 'premailer-rails3' dependency
+gem 'newrelic_rpm'
 
 group :test, :development do
 	gem 'sqlite3', '1.3.6'
