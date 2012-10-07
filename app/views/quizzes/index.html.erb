@@ -1,0 +1,7 @@
+<div class="word_list">
+	<ul>
+		<% @quizzes.each do |quiz| %>
+		<li><%= link_to quiz.created_at.strftime("%A, %b %d, %Y"), quiz_path(quiz.id) %></li>
+		<% end %>
+	</ul>
+</div>

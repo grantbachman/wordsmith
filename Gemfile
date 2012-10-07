@@ -6,7 +6,7 @@ gem 'bootstrap-sass', '~> 2.0.4'
 gem 'wordnik', "~> 4.07"
 gem 'thin', '1.4.1'
 gem 'foreman', '0.53.0'
-#gem 'premailer-rails3', '1.3.1'
+gem 'premailer-rails3', '1.3.1'
 gem 'nokogiri', '1.5.3' # 'premailer-rails3' dependency
 gem 'newrelic_rpm'
 

@@ -19,23 +19,38 @@ class WordsController < ApplicationController
 
 	def create
 		@words = Word.where(user_id: current_user)
-		@word = current_user.words.build
-		@word.name = params['word_name']
-		@word.name.downcase!
-		numDefs = 0
-		if @word.save!
-			params['word_definition'].each do |definition|
-				if @word.definitions.create(text: definition)
-					numDefs += 1
-				end
-			end
-			respond_to do |format|
-				if numDefs > 0	
+
+		deleted = Word.where(user_id: current_user, deleted: true)
+		alreadyDeleted = deleted.select { |word| word.name == params['word_name'] }
+		unless alreadyDeleted.blank?
+			word = alreadyDeleted[0]
+			word.deleted = false
+			word.save
+			if save_definitions(word.id)	
+				respond_to do |format|
 					format.js { render action: "success" }
 				end
 			end
 		else
-			format.js { render action: "failure" }
+			@word = current_user.words.build
+			@word.name = params['word_name']
+			@word.name.downcase!
+			if @word.save!
+				if save_definitions(@word.id)	
+					respond_to do |format|
+						format.js { render action: "success" }
+					end
+				else
+					respond_to do |format|
+						format.js { render action: "failure" }
+					end
+				end
+			#QuizMailer.quiz_email(current_user).deliver
+			else
+				respond_to do |format|
+					format.js { render action: "failure" }
+				end
+			end
 		end
 	end
 
@@ -51,11 +66,12 @@ class WordsController < ApplicationController
 			flash[:error] = "A word must have at least one definition." 
 			redirect_to edit_word_path(@word.id)
 		else
-			@word.definitions.destroy_all	
-			params['word_definition'].each do |definition|
-				@word.definitions.create(text: definition)
-			end
-			if @word.save
+			#@word.definitions.destroy_all	
+			#params['word_definition'].each do |definition|
+			#	@word.definitions.create(text: definition)
+			#end
+			#if @word.save
+			if save_definitions(@word.id)
 				flash[:success] = "'#{@word.name}' has been updated."
 				redirect_to word_path(@word.id)
 			end
@@ -87,5 +103,16 @@ class WordsController < ApplicationController
 		#render text: @returnValues
 
 	end
+
+	private
+		def save_definitions(word_id)
+			word = current_user.words.find_by_id(word_id)
+			word.definitions.destroy_all
+			params['word_definition'].each do |definition|
+				word.definitions.create(text: definition)
+			end
+			return word.save
+		end	
+
 
 end
