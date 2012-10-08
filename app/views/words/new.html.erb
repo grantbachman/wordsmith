@@ -1,5 +1,5 @@
 <div id="findWord">
-		<%= form_tag '/words', remote: true, html: { class: "form-inline", id: "addWordForm" } do %>
+		<%= form_tag '/words', remote: true, onclick: "", html: { class: "form-inline", id: "addWordForm" } do %>
 		<div id="fieldAndErrorsContainer">
 			<%= text_field_tag 'word_name', nil, placeholder: "Find a word...", tabindex: 1 %>
 		</div>
