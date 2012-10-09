@@ -3,13 +3,23 @@
 	<!--Auth Hash: <%= @quiz.auth_hash %> -->
 	<ol>
 		<% @questions.each do |question| %>
-			<li><div class="definition">Some text Some text Some textome textome textome textome textome textome textome textome textome textome textome textome textome text<%#= question.word.definition %></div>
-
+			<li>
+				<div class="definitions">
+					<ul>
+						<% question.word.definitions.each do |definition| %>
+							<li>
+								<%= definition.text %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
+				<div class="right_wrong">
 					<% if question.correct %>
 						<span class="right_symbol">✔</span><%= question.word.name %>
 					<% else %>
 						<span class="wrong_symbol">✘</span><%= question.response %><span class="right_answer">Correct Answer: <%= question.word.name %></span>
 					<% end %>
+				</div>
 
 			</li>
 		<% end %>

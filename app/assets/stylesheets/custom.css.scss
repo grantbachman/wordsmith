@@ -256,6 +256,27 @@ ul#word_definitions {
 
 /* end Word 'show' page */
 
+
+/* Quiz 'show' page */
+
+#results {
+	.definitions {
+		ul { 
+			list-style-type: none;
+			margin-left: 0px;
+			li {
+				padding-bottom: 5px;
+			}
+		}
+	}	
+	.right_wrong {
+		margin-top: 10px;
+	}
+}
+
+/* end Quiz 'show' page */
+
+
 footer {
 	float: left;
 	margin-top: 250px;
