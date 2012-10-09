@@ -260,6 +260,12 @@ ul#word_definitions {
 /* Quiz 'show' page */
 
 #results {
+	#not_responded {
+		margin-top: 100px;
+		color: red;
+		font-size: 30px;
+	}
+
 	.definitions {
 		ul { 
 			list-style-type: none;
@@ -269,6 +275,7 @@ ul#word_definitions {
 			}
 		}
 	}	
+
 	.right_wrong {
 		margin-top: 10px;
 	}
