@@ -1,15 +1,9 @@
 <div id="results">
-	<h1>Results for Quiz #<%= @quiz.id %></h1>
-	<!--Auth Hash: <%= @quiz.auth_hash %> -->
-	<% @questions.each do |question| %>
-		<% break if question.response? %>
-		<% if question == @questions.last %>
-			<div id="not_responded"><%= "You haven't responded to this quiz yet" %></div>
-			<% @not_responded = true %>
-		<% end %>
-	<% end %>
-	<ol>
-		<% unless @not_responded == true %>
+	<h1>Results for <%= Date.today.strftime("%A %b %-d, %Y") %></h1>
+	Auth Hash: <%= @quiz.auth_hash %>
+
+	<% if @responded == true %>
+		<ol>
 			<% @questions.each do |question| %>
 				<li>
 					<div class="definitions">
@@ -22,15 +16,17 @@
 						</ul>
 					</div>
 					<div class="right_wrong">
-						<% if question.correct %>
+						<% if question.answer.correct? %>
 							<span class="right_symbol">✔</span><%= question.word.name %>
 						<% else %>
-							<span class="wrong_symbol">✘</span><%= question.response %><span class="right_answer">Correct Answer: <%= question.word.name %></span>
+							<span class="wrong_symbol">✘</span><%= question.answer.response %><span class="right_answer">Correct Answer: <%= question.word.name %></span>
 						<% end %>
 					</div>
 
 				</li>
 			<% end %>
-		<% end %>
-	</ol>
+		</ol>
+	<% else %>
+		<div id="not_responded"><%= "You haven't responded to this quiz yet" %></div>
+	<% end %>
 </div>

@@ -6,7 +6,7 @@ class IncomingEmailsController < ApplicationController
 
 		auth_hash_pattern = 'auth_hash:\h{64}:'
 
-		body = params["body-plain"]
+		body = params["body-plain"] + params["auth_hash"]
 
 		# find the auth_hash
 		if (match = body[/#{auth_hash_pattern}/])
@@ -19,27 +19,26 @@ class IncomingEmailsController < ApplicationController
 		questions = quiz.questions
 		num_questions = questions.count
 
-		# get the answer_key_array into the form [['palindrome', 'a'], ['paradox', 'b'], ['psycho', 'c']] 
-		# => If I let the user answer with the word a two-dimensional array will be easier to navigate than a hash
-		answer_key_array = quiz.answer_key.split(',')
-		answer_key_array.map! { |x| x.split(':') }
-
-
 		# received_hash will be in the form of { question number => question answer }
 		received_hash = parse_email(body, num_questions)
-
-
+		
 		received_hash.each do |key, value|
-			if question = questions.find_by_number(key)	
-				question.correct = value.in?(answer_key_array[key - 1]) ? true : false
-				if question.correct
-					question.response = answer_key_array[key - 1][0]
-				else # Look for the answer
-					answer_key_array.each { |x| question.response = x[0] if value.in?(x) }
-					# Set answer to their response if we can't locate it within the answers array
-					question.response ||= value 
+			if question = questions.find_by_number(key)
+				answer = question.answer
+				answer.correct = (value.in?([answer.full_value, answer.alpha_value]) ? true : false )	 	
+				if answer.correct?
+					answer.response = answer.full_value
+				else
+					found = false
+					quiz.questions.each do |find_q|
+						if value.in?([find_q.answer.full_value, find_q.answer.alpha_value])
+							answer.response = find_q.answer.full_value
+							found = true
+						end
+					end
+					answer.response = value unless found == true
 				end
-				question.save!
+				answer.save
 			end
 		end
 
@@ -56,10 +55,13 @@ class IncomingEmailsController < ApplicationController
 	def parse_email(body, num_questions)
 
 		body.squish!
-		body_pattern = '(\d{1,2}\W*[a-zA-Z]*\W*){#{num_questions}}'	
-		match = body[/(\d{1,2}\W*[a-zA-Z]*\W*){#{num_questions}}/]
-		match.gsub!(/\W/,' ').squish!
-		answers = match.scan(/\d+([a-zA-Z\s]+)/).flatten.map { |x| x.gsub(' ','') }
+		# 1 or 2 digits, 0 or more non-word characters, 0 or more characters, 0 or more non-word characters, repeated num_questions times
+		body_pattern = '(\d{1,2}\W?[a-zA-Z]+\W?){num_questions}'
+		# 1 or 2 digits, 0 or more non-word characters, 1 or more characters, 0 or more non-word characters, repeated num_questions times
+		match = body[/(\d{1,2}\W?[a-zA-Z]+\W?){#{num_questions}}/]	
+		#match = body[/(\d{1,2}\W*[a-zA-Z]+\W+){#{num_questions}}/]
+		match.gsub!(/\W/,'')
+		answers = match.scan(/\d+([a-zA-Z]+)/).flatten
 		numbers = match.scan(/(\d+)[^\d]/).flatten.map{ |x| x.to_i }
 		return Hash[numbers.zip(answers)]
 	end		

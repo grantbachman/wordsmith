@@ -8,6 +8,8 @@
 #  updated_at :datetime        not null
 #  auth_hash  :string(255)
 #  answer_key :string(255)
+#  difficulty :integer
+#  word_bank  :string(255)
 #
 
 require 'spec_helper'

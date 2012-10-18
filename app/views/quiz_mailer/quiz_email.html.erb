@@ -60,17 +60,23 @@
 		<div id="container"><h2>Quiz for <%= Date.today.strftime("%A %b %-d, %Y") %></h2>
 		  	<div id="quiz_definitions">
 				<h4>Definitions</h4>
-		  		<ol>
-					<% @definitions_array.each do |definition| %>
-						<li><%= definition %></li>	
+				<ol>
+					<% @questions.each do |question| %>
+					<li>
+						<ul>
+							<% question.word.definitions.each do |definition| %>
+								<li><%= definition.text %></li>
+							<% end %>
+						</ul>
+					</li>
 					<% end %>
-		  		</ol>
-		  	</div>
+				</ol>
+	  	</div>
 		  	<div id="quiz_wordbank">
 		  		<h4>Word bank</h4>
 		  		<ol>
-		  			<% @shuffled_words_array.each do |word| %>
-		  				<li><%= word %></li>
+		  			<% @word_bank.each do |word| %>
+		  				<li><%= word %></li>	
 		  			<% end %>
 		  		</ol>
 		  	</div>

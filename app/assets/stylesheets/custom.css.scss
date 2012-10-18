@@ -1,10 +1,17 @@
 @import "bootstrap";
 
+* {
+	margin: 0;
+}
+html,body {
+	height: 100%;
+}
 body#body {
 	font-size: 12pt;
 	h1,h2 {
 		margin-bottom: 8px;
 	}
+	height: 100%;
 }
 
 .center {
@@ -99,6 +106,8 @@ header {
 	width: 940px;
 	margin-left: auto;
 	margin-right: auto;
+	height: auto !important;
+	height: 100%;
 }
 .registerLogin {
 	input[type="email"],input[type="text"],input[type="password"] {
@@ -262,6 +271,7 @@ ul#word_definitions {
 #results {
 	#not_responded {
 		margin-top: 100px;
+		text-align: center;
 		color: red;
 		font-size: 30px;
 	}
@@ -282,10 +292,3 @@ ul#word_definitions {
 }
 
 /* end Quiz 'show' page */
-
-
-footer {
-	float: left;
-	margin-top: 250px;
-	width: 100%;
-}

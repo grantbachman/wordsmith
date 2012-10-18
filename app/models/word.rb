@@ -8,6 +8,8 @@
 #  updated_at :datetime        not null
 #  user_id    :integer
 #  deleted    :boolean
+#  level      :integer
+#  difficulty :integer
 #
 
 class Word < ActiveRecord::Base

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920225421) do
+ActiveRecord::Schema.define(:version => 20121012043905) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "alpha_value"
+    t.string   "full_value"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "response"
+    t.boolean  "correct"
+  end
 
   create_table "definitions", :force => true do |t|
     t.integer  "word_id"
@@ -23,9 +33,6 @@ ActiveRecord::Schema.define(:version => 20120920225421) do
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.integer  "word_id"
-    t.string   "style"
-    t.string   "response"
-    t.boolean  "correct"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "number"
@@ -37,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20120920225421) do
     t.datetime "updated_at", :null => false
     t.string   "auth_hash"
     t.string   "answer_key"
+    t.integer  "difficulty"
+    t.string   "word_bank"
   end
 
   create_table "users", :force => true do |t|
@@ -52,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20120920225421) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "num_quiz_questions",     :default => 7
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -59,10 +69,12 @@ ActiveRecord::Schema.define(:version => 20120920225421) do
 
   create_table "words", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "user_id"
     t.boolean  "deleted"
+    t.integer  "level",      :default => 1
+    t.integer  "difficulty", :default => 1
   end
 
   add_index "words", ["user_id"], :name => "index_words_on_user_id"

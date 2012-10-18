@@ -5,9 +5,6 @@
 #  id         :integer         not null, primary key
 #  quiz_id    :integer
 #  word_id    :integer
-#  style      :string(255)
-#  response   :string(255)
-#  correct    :boolean
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #  number     :integer
@@ -20,11 +17,10 @@ class Question < ActiveRecord::Base
 
 	belongs_to :word
 	belongs_to :quiz
+	has_one :answer, dependent: :destroy
 
 	validates :number, presence: true
 	validates :quiz_id, presence: true
 	validates :word_id, presence: true
-	validates :style, presence: true
-
 
 end

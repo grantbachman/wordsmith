@@ -6,6 +6,9 @@ class QuizzesController < ApplicationController
 	def show
 		@quiz = Quiz.find(params[:id])
 		@questions = @quiz.questions.find(:all, order: "number")
+		@questions.each do |question|
+			@responded = true if question.answer.response?
+		end
 	end
 
 	def index

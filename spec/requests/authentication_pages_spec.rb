@@ -10,7 +10,7 @@ describe "Authentication" do
 
 			it "should have correct links" do
 			 	page.should have_button('Log in')
-				page.should have_button('Sign up')
+				page.should have_button('Sign me up!')
 			end
 		end
 		
@@ -29,17 +29,17 @@ describe "Authentication" do
 		before { visit new_user_registration_path }
 
 		it "should not register users with invalid info" do
-			fill_in "user_email",											:with => "blah@gmail.com"
-			fill_in "user_password", 									:with => "short"
+			fill_in "user_email",				  :with => "blah@gmail.com"
+			fill_in "user_password", 			  :with => "short"
 			fill_in "user_password_confirmation", :with => "short" # Why won't "Again" work?
-			expect { click_button "Sign up" }.not_to change(User, :count)
+			expect { click_button "Sign me up!" }.not_to change(User, :count)
 		end
 
 		it "should register users with valid info" do
 			fill_in "user_email",											:with => "example@example.com"
 			fill_in "user_password", 									:with => "foobar"
 			fill_in "user_password_confirmation",	:with => "foobar" # Why won't "Again" work?
-			expect { click_button "Sign up" }.to change(User, :count).by(1)
+			expect { click_button "Sign me up!" }.to change(User, :count).by(1)
 		end
 	end
 
