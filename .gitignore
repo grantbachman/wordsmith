@@ -7,6 +7,7 @@
 # gdb Ignore my password file
 /config/initializers/gdb.rb
 .env
+TODO
 
 # Ignore bundler config
 /.bundle
