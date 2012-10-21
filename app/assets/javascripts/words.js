@@ -120,6 +120,7 @@ $(document).ready(function(){
 
 	
 		function ajaxCall(word){
+			word = word.toLowerCase();
 			$.ajax({
 					url: 'words/get_definition',
 					data: 'word='+word,

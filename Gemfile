@@ -12,9 +12,9 @@ gem 'newrelic_rpm'
 
 group :test, :development do
 	gem 'sqlite3', '1.3.6'
-	gem 'rspec', '2.10.0'
-	gem 'rspec-rails', '2.10.1'
-	gem 'guard-rspec', '1.0.1'
+	gem 'rspec'
+	gem 'rspec-rails'
+	gem 'guard-rspec'
 	gem 'factory_girl_rails', '3.4.0'
 	gem 'spork', '0.9.2'
 	gem 'guard-spork', '1.0.0'

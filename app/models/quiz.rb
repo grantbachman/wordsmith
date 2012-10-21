@@ -10,11 +10,12 @@
 #  answer_key :string(255)
 #  difficulty :integer
 #  word_bank  :string(255)
+#  responded  :boolean
 #
 
 class Quiz < ActiveRecord::Base
 
-	attr_accessible :answer_key, :difficulty
+	attr_accessible :answer_key, :difficulty, :responded
 	before_create :generate_hash
 	after_create :create_quiz_questions, :generate_word_bank, :match_answers
 
@@ -72,6 +73,7 @@ class Quiz < ActiveRecord::Base
 				question = self.questions.create(number: counter+1, word_id: word.id)
 				question.create_answer(full_value: question.word.name)
 			end
+			return self.questions.count
 		end	
 
 		def choose_difficulty

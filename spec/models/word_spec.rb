@@ -21,7 +21,6 @@ describe Word do
 	
 	subject { @word }
 	
-	it { should respond_to (:questions) }
 	it { should respond_to(:name) }
 	it { should respond_to(:user_id) }
 	it { should respond_to(:user) }

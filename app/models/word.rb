@@ -18,7 +18,7 @@ class Word < ActiveRecord::Base
   	default_scope where(deleted: false)
 	
 	belongs_to :user
-	has_many :questions, :dependent => :destroy
+	has_many :questions
 	has_many :definitions, :dependent => :destroy
 
 	validates :user_id, presence: true

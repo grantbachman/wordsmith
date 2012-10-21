@@ -6,7 +6,7 @@ class IncomingEmailsController < ApplicationController
 
 		auth_hash_pattern = 'auth_hash:\h{64}:'
 
-		body = params["body-plain"] + params["auth_hash"]
+		body = params["body-plain"]
 
 		# find the auth_hash
 		if (match = body[/#{auth_hash_pattern}/])

@@ -10,6 +10,7 @@
 #  answer_key :string(255)
 #  difficulty :integer
 #  word_bank  :string(255)
+#  responded  :boolean
 #
 
 require 'spec_helper'
@@ -17,15 +18,42 @@ require 'spec_helper'
 describe Quiz do
 
 	let(:user) { FactoryGirl.create(:user) } 
-	before(:each) { @quiz = user.quizzes.build() }
 
-	subject { @quiz } 
+	before(:all) do
+		#words = %w(grant david bachman paradox conquer hero drive)
+		#words.each do |word|
+		#	x = user.words.create(name: word)
+		#	x.definitions.create(text: 'sample definition')
+		#end
+	end
 
-	it { should respond_to(:user) }
-	it { should respond_to(:user_id) }
-	it { should respond_to(:auth_hash) }
-	its(:user) { should == user }
-	it { should be_valid }
+	after(:all) do
+		user.destroy
+	end
+
+	before(:all) do
+	end
+
+	before(:each) do
+		user.words.build(name: "grant")
+		@quiz = user.quizzes.create
+	end
+
+	describe "Quiz attributes" do
+
+		it "should respond to attributes" do
+			@quiz.should respond_to(:questions)
+			@quiz.should respond_to(:user)
+			@quiz.should respond_to(:user_id)
+			@quiz.should respond_to(:auth_hash)
+			@quiz.user.should == user
+		end
+
+		it "should have the right number of questions" do	
+			#@quiz.should have(1).question
+		end
+
+	end
 
 	describe "When user_id is not present" do
 		before(:each) { @quiz.user_id = nil }

@@ -1,7 +1,17 @@
 <div class="word_list">
+	<div>
+		<%= link_to "New Quiz", new_quiz_path, class: 'btn btn-primary' %>
+	</div>
 	<ul>
 		<% @quizzes.each do |quiz| %>
-		<li><%= link_to quiz.created_at.strftime("%A, %b %d, %Y"), quiz_path(quiz.id) %></li>
+			<li>
+				<% if quiz.responded? %>	
+					<%= link_to quiz.created_at.strftime("%A, %b %d, %Y"), quiz_path(quiz.id) %>
+				<% else %>
+					<span class='grey'><%=	quiz.created_at.strftime("%A, %b %d, %Y") %></span>
+					<%= link_to 'Take quiz', respond_quiz_path(quiz.id), class: 'btn btn-success' %>
+				<% end %>
+			</li>
 		<% end %>
 	</ul>
 </div>

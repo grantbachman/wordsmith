@@ -1,8 +1,8 @@
 <div id="results">
-	<h1>Results for <%= Date.today.strftime("%A %b %-d, %Y") %></h1>
-	Auth Hash: <%= @quiz.auth_hash %>
+	<!--Auth Hash: <%= @quiz.auth_hash %> -->
 
-	<% if @responded == true %>
+	<% if @quiz.responded? %>
+		<h1>Results for <%= Date.today.strftime("%A %b %-d, %Y") %></h1>
 		<ol>
 			<% @questions.each do |question| %>
 				<li>

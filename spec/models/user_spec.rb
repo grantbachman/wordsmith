@@ -3,13 +3,25 @@ require 'spec_helper'
 describe User do
 
 	before do
-		@user = User.new(email: "example@example.com", password: "foobar",
+		@user = User.new(email: "taken@example.com", password: "foobar",
 										 password_confirmation: "foobar")
 	end
 
-	subject { @user }
-	it { should respond_to(:words) }
-	it { should respond_to(:quizzes) }
+	describe "User attributes" do
+		before(:each) do
+			@word = @user.words.build(name: "grant")
+		end
+		
+		it "should respond to attributes" do
+			@user.should respond_to(:words)
+			@user.should respond_to(:quizzes)
+		end
+
+		it "should have a word" do
+			@user.should have(1).word
+		end
+
+	end
 
 end
 # == Schema Information

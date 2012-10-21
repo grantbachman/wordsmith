@@ -4,8 +4,5 @@ FactoryGirl.define do
   factory :question do
   	user
   	quiz
-    type ""
-    answer "MyString"
-    correct false
   end
 end

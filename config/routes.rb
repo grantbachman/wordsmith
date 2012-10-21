@@ -7,7 +7,10 @@ Wordsmith::Application.routes.draw do
     get 'get_definition', on: :collection
   end
 
-	resources :quizzes
+	resources :quizzes do
+    get 'respond', on: :member
+    post 'check_answers', on: :member
+  end
 	resources :incoming_emails, only: [:new,:create,:index]
 
 	authenticated :user do
