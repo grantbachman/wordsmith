@@ -45,7 +45,7 @@ class WordsController < ApplicationController
 						format.js { render action: "failure" }
 					end
 				end
-			QuizMailer.quiz_email(current_user).deliver
+			#QuizMailer.quiz_email(current_user).deliver
 			else
 				respond_to do |format|
 					format.js { render action: "failure" }
