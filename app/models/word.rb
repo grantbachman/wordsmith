@@ -23,4 +23,22 @@ class Word < ActiveRecord::Base
 
 	validates :user_id, presence: true
 	validates :name, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }
+
+	def increment_level(quiz_id)
+		# if they are responding to past quizzes, it shouldn't affect the word's levels
+		unless self.difficulty > Quiz.find(quiz_id).difficulty then 
+			if self.level == 3
+				self.difficulty += 1
+				self.level = 1
+			else
+				self.level += 1
+			end
+		end
+	end	
+
+	def decrement_level(quiz_id)
+		# if they are responding to past quizzes, it shouldn't affect the word's levels
+		self.level = 1 unless self.difficulty > Quiz.find(quiz_id).difficulty
+	end
+
 end

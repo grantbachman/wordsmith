@@ -1,13 +1,18 @@
-<h1><%= @word.name %></h1>
-
-<ul id="word_definitions">
-<% @word.definitions.each do |definition| %>
-	<li><%= definition.text %></li>
-<% end %>
-</ul>
-<div id="word_options">
-<ul>
-<li><%= button_to "Edit Definitions", edit_word_path(@word.id), method: :get, class: "btn btn-info" %></li>
-<li><%= button_to "Delete Word", word_path(@word.id), method: :delete, confirm: "Are you sure you want to delete this word?", class: "btn btn-danger" %></li>
-</ul>
+<div id='page_left'>
+	<h1><%= @word.name %></h1>
+	<ul id="word_definitions">
+	<% @word.definitions.each do |definition| %>
+		<li><%= definition.text %></li>
+	<% end %>
+	</ul>
+	<div id="word_options">
+		<ul>
+		<li><%= button_to "Edit Definitions", edit_word_path(@word.id), method: :get, class: "btn btn-info" %></li>
+		<li><%= button_to "Delete Word", word_path(@word.id), method: :delete, confirm: "Are you sure you want to delete this word?", class: "btn btn-danger" %></li>
+		</ul>
+	</div>
+</div>
+<div id='page_right'>
+	<h5>Difficulty: <%= @word.difficulty %></h5>
+	<h5>Level: <%= @word.level %></h5>
 </div>

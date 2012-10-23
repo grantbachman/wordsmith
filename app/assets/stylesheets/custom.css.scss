@@ -235,7 +235,7 @@ label {
 			border-bottom-width: 1px;
 			border-bottom-length: 20%;
 			.grey {
-				color: lightgrey;
+				color: grey;
 			}
 			a {
 				display: inline;
@@ -275,6 +275,17 @@ ul#word_definitions {
 
 /* Quiz 'show' page */
 
+#page_left {
+	float: left;
+	width: 45%;
+
+}
+
+#page_right {
+	float: left;
+	width: 45%;	
+	margin-left: 10%;
+}
 #results {
 	#not_responded {
 		margin-top: 100px;

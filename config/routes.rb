@@ -10,6 +10,7 @@ Wordsmith::Application.routes.draw do
 	resources :quizzes do
     get 'respond', on: :member
     post 'check_answers', on: :member
+    post 'quiz_from_email', on: :collection
   end
 	resources :incoming_emails, only: [:new,:create,:index]
 

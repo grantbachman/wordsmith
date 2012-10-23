@@ -44,7 +44,7 @@ class Quiz < ActiveRecord::Base
 				questions.each { |question| word_bank.push(question.word.name) }	
 				if difficulty == 2 
 					num_total_words = user.words.count
-					num_extra_words = ((num_total_words - @num_questions) < @num_questions ? num_total_word - @num_questions : @num_questions)
+					num_extra_words = ((num_total_words - @num_questions) < @num_questions ? num_total_words - @num_questions : @num_questions)
 					num_extra_words.times do
 						begin
 							word = user.words.sample
@@ -77,12 +77,11 @@ class Quiz < ActiveRecord::Base
 		end	
 
 		def choose_difficulty
-			diff_hash = { 1 => 0, 2 => 0, 3 => 0 }
+			diff_hash = { 1 => 0, 2 => 0, 3 => 0, 4 => 0 }
 			user.words.each { |word| diff_hash[word.difficulty] += 1 }
-			self.difficulty = diff_hash.sort_by { |difficulty, num| num }.last[0]
-			save
+			diff_hash[4] = 0 # I don't have a quiz for Level 4 difficulty...yet.
+			self.update_attributes(difficulty: diff_hash.sort_by { |difficulty, num| num }.last[0])
 		end
-
 
 
 end

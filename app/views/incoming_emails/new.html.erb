@@ -1,4 +1,4 @@
-<%= form_tag('/incoming_emails') do %>
+<%= form_tag('/quizzes/quiz_from_email') do %>
 <div>Auth Hash: <%= text_field_tag('auth_hash') %></div>
 <div>Answers: <%= text_field_tag('body-plain') %></div>
 <div><%= submit_tag 'Incoming!' %></div>
