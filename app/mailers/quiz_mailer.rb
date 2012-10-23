@@ -1,11 +1,19 @@
 class QuizMailer < ActionMailer::Base
   default from: "Quiz@wordsmith.mailgun.org"
 
+  
 	def welcome_email(user)
 		mail(to: user.email, subject: "Welcome to Wordsmith!")
 	end
 
 	def quiz_email(user)
+		
+	  	@encoding_options = {
+	  		invalid: :replace,
+	  		undef: :replace,
+	  		replace: '',
+	  		universal_newline: true	
+	  	}
 
 		@quiz = user.quizzes.create
 		@questions = @quiz.questions.all(order: "number")

@@ -65,7 +65,7 @@
 					<li>
 						<ul>
 							<% question.word.definitions.each do |definition| %>
-								<li><%= definition.text %></li>
+								<li><%= definition.text.encode(Encoding.find('ASCII'), @encoding_options) %></li>
 							<% end %>
 						</ul>
 					</li>
