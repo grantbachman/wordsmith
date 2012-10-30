@@ -5,3 +5,4 @@ $('<div />', {	class: "alert alert-success",
 			 }).wrap('<div class="single_error" />').parent().appendTo("#fieldAndErrorsContainer");
 open = true;
 $('input#word_name').val('');
+$('#page_left').html("<%= escape_javascript(render partial: 'word_list') %>");

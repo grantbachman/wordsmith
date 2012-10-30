@@ -25,17 +25,17 @@ body#body {
 header {
 	width: 100%;
 	min-width: 960px;
-	#background-color: #2c2c2c;
+	background-color: #2c2c2c;
 	height: 50px;
-	border-bottom-style: dashed;
-	border-bottom-width: 1px;
-	border-bottom-color: darkgrey;
+	#border-bottom-style: dashed;
+	#border-bottom-width: 1px;
+	#border-bottom-color: darkgrey;
 
 	#logo {
 		float: left;
 		font-size: 2.7em;
-		color: #2c2c2c;
-		#color: white;
+		#color: #2c2c2c;
+		color: white;
 		#text-transform: uppercase;
 		letter-spacing: -1px;
 		padding-top: 5px;
@@ -79,10 +79,11 @@ header {
 			float: left;
 			padding-left: 15px;
 			a {
-				#color: #aaa;
+				color: #ccc;
 				&:hover {
-					#color: white;
-					color: black;
+					color: white;
+					#color: black;
+					#text-decoration: underline;
 					text-decoration: none;
 				}
 			}	
@@ -138,23 +139,39 @@ header {
 input#word_name::-webkit-input-placeholder { padding-top: 6px; }
 input#word_name:-moz-placeholder{ padding-top: 6px;}
 
-input#word_name {
-	font-size: 26px;	
-	padding: 10px;
-	#height: 30px;
-	width: 250px;
-	text-align: middle;
+#words_index {
+	#page_left {
+		float: left;
+		width: 250px;
+		#background-color: blue;
+	}
+	#page_divider {
+		float: left;	
+		width: 40px;
+		#background-color: yellow;
+	}
+	#page_right {
+		float: left;
+		width: 650px;	
+		#background-color: pink;
+	}
 }
 
+
 #findWord,#editWord{
-	width: 50%;
+	#background-color: green;
+	width: 550px;
 	text-align: center; 
-	margin-top: 40px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0px auto 0px auto;
 	input[type=submit] { margin-top: 10px; font-size: 14pt; height: 35px; width: 272px; } /* removed display: none; */
 	button[type=button] { font-size: 14pt; height: 35px; width: 272px; }
 
+	input#word_name {
+		font-size: 26px;	
+		padding: 10px;
+		width: 250px;
+		text-align: middle;
+	}
 	#fieldAndErrorsContainer {
 		margin-left: auto;
 		margin-right: auto;
@@ -173,37 +190,27 @@ input#word_name {
 			position: inline;
 			li {
 				margin-bottom: 2px;
-				border-radius: 5px;
-				-moz-border-radius: 5px;
+				#border-radius: 5px;
+				#-moz-border-radius: 5px;
 				label {
 					padding: 10px;
 					font-size: 11pt;
 					letter-spacing: 1px;
-				}/*
-				label:hover {
-					cursor: pointer;
-					#cursor: hand;
-					background-color: #dff0d8;
-					border-radius: 5px;
-					-moz-border-radius: 5px;
-				}*/
+				}
 			}
+		}
+		input[type=checkbox] {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+			opacity: 0;
 		}
 	}
 }
-
 .no_display {
 	display: none;
 }
 
-#addDefinitionContainer input[type=checkbox] {
-	position: absolute;
-	top: -9999px;
-	left: -9999px;
-	opacity: 0;
-}
-label {
-}
 .checkmarkText {
 	overflow: hidden;
 }
@@ -224,7 +231,7 @@ label {
 
 .word_list {
 	
-	width: 45%;
+	width: 100%;
 
 	ul {
 		list-style-type: none;
@@ -275,17 +282,6 @@ ul#word_definitions {
 
 /* Quiz 'show' page */
 
-#page_left {
-	float: left;
-	width: 45%;
-
-}
-
-#page_right {
-	float: left;
-	width: 45%;	
-	margin-left: 10%;
-}
 #results {
 	#not_responded {
 		margin-top: 100px;

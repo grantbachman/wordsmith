@@ -1,14 +1,1 @@
-<div id="findWord">
-		<%= form_tag '/words', remote: true, onclick: "", html: { class: "form-inline", id: "addWordForm" } do %>
-		<div id="fieldAndErrorsContainer">
-			<%= text_field_tag 'word_name', nil, placeholder: "Find a word...", tabindex: 1 %>
-		</div>
-
-
-	<div id="addDefinitionContainer" style="display: none"><ul></ul></div>
-	<div class="submitButton">
-		<%= button_tag "Find definitions", class: 'btn',id: "findDefinitions", type: 'button', tabindex: 2 %>
-		<%= submit_tag "Save word and definitions", style: "display: none", class: "btn btn-primary", tabindex: 3 %>
-	</div>
-	<% end %>
-</div>
+<%= render partial: 'find_word' %>
