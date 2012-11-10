@@ -91,6 +91,19 @@ header {
 	}
 }
 
+#page_left {
+	float: left;
+	width: 450px;
+}
+#page_divider {
+	float: left;
+	width: 40px;	
+}
+#page_right {
+	float: left;
+	width: 450px;	
+}
+
 .centerDiv {
 	margin-left: auto;
 	margin-right: auto;
@@ -102,8 +115,10 @@ header {
 	}
 }
 
+#flash_area {
+	height: 50px;
+}
 #main {
-	margin-top: 40px;
 	width: 940px;
 	margin-left: auto;
 	margin-right: auto;
@@ -162,7 +177,7 @@ input#word_name:-moz-placeholder{ padding-top: 6px;}
 	#background-color: green;
 	width: 550px;
 	text-align: center; 
-	margin: 0px auto 0px auto;
+	margin: 0px 0px 0px 20px;
 	input[type=submit] { margin-top: 10px; font-size: 14pt; height: 35px; width: 272px; } /* removed display: none; */
 	button[type=button] { font-size: 14pt; height: 35px; width: 272px; }
 

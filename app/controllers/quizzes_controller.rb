@@ -35,6 +35,8 @@ class QuizzesController < ApplicationController
 		redirect_to quiz_path(quiz_hash['quiz_id'])
 	end
 
+
+	# This could/should go into the model 
 	def grade_quiz(quiz_hash)
 		@quiz = Quiz.find(quiz_hash['quiz_id'])
 		@quiz.questions.each do |question|

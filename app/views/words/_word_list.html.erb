@@ -1,7 +1,11 @@
 <div class="word_list">
 	<ul>
-		<% @words.all(order: 'name').each do |word| %>
-		<li><%= link_to word.name, word_path(word.id) %></li>
+		<% if @words.blank? %>
+			You have no words!
+		<% else %>
+			<% @words.all(order: 'name').each do |word| %>
+			<li><%= link_to word.name, word_path(word.id) %></li>
+			<% end %>
 		<% end %>
 	</ul>
 </div>

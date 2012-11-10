@@ -1,5 +1,44 @@
 @import "bootstrap";
 
+
+#quiz_calendar {
+	width: 550px;
+	table tr
+		th {
+			border: solid 1px;
+			width: 75px;
+			height: 20px;
+		}
+		td {
+			border: solid 1px;
+			width: 75px;
+			height: 75px;
+			vertical-align: top;
+			text-align: right;
+			font-size: 15px;
+		}
+	#calendar_nav{
+		.last {
+			float: left;
+			text-align: left;
+			width: 183px;
+		}
+		.title {
+			float: left;
+			text-align: center;
+			font-size: 24px;
+			font-weight: bold;
+			width: 183px;
+		}
+		.next {
+			float: left;
+			text-align: right;
+			width: 183px;
+		}
+	}
+
+}
+
 #results {
 	margin-left: auto;
 	margin-right: auto;

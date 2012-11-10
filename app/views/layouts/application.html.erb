@@ -19,7 +19,6 @@
 						<div id="navNavLinks">
 								<li><%= link_to "My quizzes", quizzes_path %></li> 
 								<li><%= link_to "My words", words_path %></li>
-								<li><%= link_to "Home", root_path %></li>
 								<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 						</div>
 					<% else %>
@@ -31,12 +30,13 @@
 		</div>
 	</header>
 	<div id="main" class="row-fluid">
-		<div class="span12">
+		<div id="flash_area">
 			<% unless (params[:controller].in?(['devise/sessions','devise/registrations'])) %>
-				<%= render 'shared/flash_messages' %>
+					<%= render 'shared/flash_messages' %>
 			<% end %>
-
-			<%= yield %>
+		</div>
+		<div class="span12">
+						<%= yield %>
 			<%= debug(params) if Rails.env.development? %>
 		</div>
 		<div class="push"></div>
