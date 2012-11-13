@@ -16,7 +16,9 @@ class QuizzesController < ApplicationController
 	end
 
 	def index
-		@quizzes = current_user.quizzes.find(:all, order: "created_at DESC")
+		# Find a better way to write this.	
+		@quizzes = current_user.quizzes.select("id, created_at")
+		@quizzes.map { |x| x.created_at = x.created_at.to_i*1000 }
 	end
 
 	def respond

@@ -1,16 +1,12 @@
 <%= link_to "New Quiz", new_quiz_path, class: 'btn btn-success' %>
 
 <div id="quiz_calendar" class="centerDiv">
+	<%= content_tag 'div', id: 'quiz_data', data: { quizzes: @quizzes } {} %> 
 	<div id="calendar_nav">
-		<span class="last">
-			<%= link_to "Last Month", '#', id: 'last_month' %>
-		</span>
+		<span class="last"><%= link_to "Last Month", '#', id: 'last_month' %></span>
 		<span class="title"></span>
-		<span class="next">
-			<%= link_to "Next Month", '#', id: 'next_month' %>
-		</span>
+		<span class="next"><%= link_to "Next Month", '#', id: 'next_month' %></span>
 	</div>	
-<h3></h3>
 	<table id='calendar'>
 		<tr>
 			<% day = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] %>
@@ -20,23 +16,3 @@
 		</tr>
 	</table>	
 </div>
-<!--
-<div class="word_list">
-	<div>
-		<%= link_to "New Quiz", new_quiz_path, class: 'btn btn-primary' %>
-	</div>
-	<ul>
-		<% @quizzes.each do |quiz| %>
-			<li>
-				<% if quiz.responded? %>	
-					<%= link_to quiz.created_at.strftime("%A, %b %d, %Y"), quiz_path(quiz.id) %>
-				<% else %>
-					<span class='grey'><%=	quiz.created_at.strftime("%A, %b %d, %Y") %></span>
-					<%= link_to 'Take quiz', respond_quiz_path(quiz.id), class: 'btn btn-success' %>
-				<% end %>
-			</li>
-		<% end %>
-	</ul>
-</div>
-
--->
