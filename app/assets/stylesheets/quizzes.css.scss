@@ -2,7 +2,114 @@
 
 
 #quiz_calendar {
-	width: 550px;
+
+	width: 525px;
+
+	#nav {
+		background-color: lightGrey;
+		span {
+			float: left;
+			width: 160px;
+			margin-bottom: 10px;
+		}
+		.title {
+			width: 205px;
+			text-align: center;
+			font-size: 24px;
+			font-weight: bold;
+		}
+		.next { text-align: right;}
+	}
+
+	table {
+		width: 525px;	
+		cellpadding: 0px;
+
+		a {
+			display: block;
+			height: 100%;
+			text-decoration: none;
+			color: #333;
+		}
+		.day {
+			position: absolute;
+			z-index: 1;
+			text-align: right;
+			float: left;
+			padding-right: 4px;
+			margin-top: 4px;
+			width: 71px;
+			height: 10px;
+			line-height: 10px;
+			font-size: 15px;	
+		}
+
+		td {
+			padding: 0;
+			vertical-align: top;
+			border: 1px solid #333;
+			width: 75px;
+			height: 75px;
+		}
+
+		.responded {
+			height: 75px;	
+			width: 100%;
+			text-align: center;
+			font-size: 20px;
+			color: green;
+			line-height: 75px;
+			background-color: #AFFFA1; 
+		}
+		.not_responded {
+			position: absolute;
+			display: table;
+			height: 75px;	
+			width: 74px;
+			font-size: 15px;
+			text-align: center;
+			vertical-align: middle;
+			background-color: #FFFAB3; 
+			span {
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 	table tr
 		th {
 			border: solid 1px;
@@ -17,25 +124,82 @@
 			text-align: right;
 			font-size: 15px;
 		}
+
+
+
+
 	#calendar_nav{
+		width: 550px;
+		background-color: orange;
+		padding-bottom: 20px;
 		.last {
 			float: left;
 			text-align: left;
-			width: 183px;
+			width: 33.3333%;
+			#width: 183px;
+			background-color: blue;
 		}
 		.title {
 			float: left;
 			text-align: center;
 			font-size: 24px;
 			font-weight: bold;
-			width: 183px;
+			width: 33.3333%;
+			#width: 183px;
+			margin-bottom: 10px;
+			background-color: pink;
 		}
 		.next {
 			float: left;
 			text-align: right;
-			width: 183px;
+			width: 33.3333%;
+			#width: 183px;
+			background-color: green;
 		}
 	}
+
+	#calendar {
+		td {
+			padding: 0;
+			margin: 0;
+			.cal_date {
+				background-color: pink;
+				position: relative;
+				float: left;
+				font-size: 15px;
+				height: 10px;
+				line-height: 10px;
+				padding-top: 4px;
+				width: 97%;
+				text-align: right;
+			}
+		}
+		.score {
+			margin: 0px;
+			background-color: blue;
+			position: relative;
+			float: left;
+			height: 61px;
+			width: 77px;
+		}
+		.respond_font {
+			font-size: 20px;
+			line-height: 58px;
+		}
+		tr td a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			text-decoration: none;
+			color: #333;
+		}	
+
+		.not_responded {
+			background-color: #FFF582;
+		}
+	}	
+
+*/
 
 }
 
@@ -67,10 +231,11 @@
 		color: grey;
 	}
 
-	h1 {
+	h1, h3 {
 		text-align: center;	
 		margin-bottom: 20px;
 	}
+
 
 	li {
 		padding-bottom: 20px;

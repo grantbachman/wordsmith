@@ -17,7 +17,8 @@ class QuizzesController < ApplicationController
 
 	def index
 		# Find a better way to write this.	
-		@quizzes = current_user.quizzes.select("id, created_at")
+		@quizzes = current_user.quizzes.select("id, created_at, responded, score")
+		@quizzes.uniq! { |x| x.created_at.to_date } # Remove duplicates
 		@quizzes.map { |x| x.created_at = x.created_at.to_i*1000 }
 	end
 
@@ -35,26 +36,6 @@ class QuizzesController < ApplicationController
 		quiz_hash = convert_to_hash
 		grade_quiz(quiz_hash)
 		redirect_to quiz_path(quiz_hash['quiz_id'])
-	end
-
-
-	# This could/should go into the model 
-	def grade_quiz(quiz_hash)
-		@quiz = Quiz.find(quiz_hash['quiz_id'])
-		@quiz.questions.each do |question|
-			answer = question.answer
-			answer.response = quiz_hash["#{question.number}"].downcase.strip if quiz_hash.has_key?("#{question.number}")
-			answer.correct = (answer.full_value == answer.response ? true : false )
-			if answer.correct?
-				question.word.increment_level(@quiz.id)
-			else
-				question.word.decrement_level(@quiz.id)
-			end
-			question.word.save
-			answer.save
-		end	
-		@quiz.update_attributes(responded: true)
-		#redirect_to quiz_path(@quiz.id)
 	end
 
 	def quiz_from_email 
@@ -92,6 +73,7 @@ class QuizzesController < ApplicationController
 	private
 
 		def grade_quiz(quiz_hash)
+			score = 0
 			@quiz = Quiz.find(quiz_hash['quiz_id'])
 			@quiz.questions.each do |question|
 				answer = question.answer
@@ -99,14 +81,15 @@ class QuizzesController < ApplicationController
 				answer.correct = (answer.full_value == answer.response ? true : false )
 				if answer.correct?
 					question.word.increment_level(@quiz.id)
+					score += 1
 				else
 					question.word.decrement_level(@quiz.id)
 				end
 				question.word.save
 				answer.save
 			end	
-			@quiz.update_attributes(responded: true)
-			#redirect_to quiz_path(@quiz.id)
+			quiz_score = (score/@quiz.questions.count.to_f*100).round
+			@quiz.update_attributes(responded: true, score: quiz_score)
 		end
 
 		def parse_email(body, num_questions)

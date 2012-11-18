@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019011755) do
+ActiveRecord::Schema.define(:version => 20121113232601) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20121019011755) do
     t.integer  "difficulty"
     t.string   "word_bank"
     t.boolean  "responded",  :default => false
+    t.integer  "score"
   end
 
   create_table "users", :force => true do |t|

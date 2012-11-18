@@ -10,7 +10,8 @@
 #  answer_key :string(255)
 #  difficulty :integer
 #  word_bank  :string(255)
-#  responded  :boolean
+#  responded  :boolean         default(FALSE)
+#  score      :integer
 #
 
 require 'spec_helper'

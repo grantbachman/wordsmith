@@ -10,12 +10,13 @@
 #  answer_key :string(255)
 #  difficulty :integer
 #  word_bank  :string(255)
-#  responded  :boolean
+#  responded  :boolean         default(FALSE)
+#  score      :integer
 #
 
 class Quiz < ActiveRecord::Base
 
-	attr_accessible :answer_key, :difficulty, :responded
+	attr_accessible :answer_key, :difficulty, :responded, :score
 	before_create :generate_hash
 	after_create :create_quiz_questions, :generate_word_bank, :match_answers
 

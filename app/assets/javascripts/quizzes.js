@@ -2,13 +2,13 @@ var monthNames = ['January','February','March','April','May','June','July','Augu
 
 function printCalendar(date,quizzes){
 
-	// remove table rows currently showing
-	$('#calendar').find("tr:gt(0)").remove();
+	// remove table rows currently showing starting at row 1
+	$('#quiz_calendar table').find("tr:gt(0)").remove();
 
 	date = typeof date !== 'undefined' ? date : new Date();
 
-	// handle calendar
-	$('#calendar_nav .title').text(monthNames[date.getUTCMonth()] + " " + date.getUTCFullYear());
+	// print Calendar head
+	$('#quiz_calendar #nav .title').text(monthNames[date.getUTCMonth()] + " " + date.getUTCFullYear());
 
 	var numDays = new Date(date.getUTCFullYear(),date.getUTCMonth()+1,0).getUTCDate(); 
 	var shift = new Date(date.getUTCFullYear(),date.getUTCMonth(),1).getDay();
@@ -31,25 +31,35 @@ function printCalendar(date,quizzes){
 		// add a new week
 		if(col == 1)
 		{
-			$('<tr />').appendTo('#calendar');	
+			$('<tr />').appendTo('table');	
 			for(var i=0;i<7;i++)
 			{
-				$('<td />').appendTo('#calendar tr:last-child');
+				$('<td />').appendTo('table tr:last-child');
 			}
 		};
-		if(row == 2 && col < shift)
+		if(row == 2 && col <= shift)
 		{
 			col = shift + 1;
 		};
-		$('#calendar tr:nth-child('+row+') td:nth-child('+col+')').text(dayCounter);	
-
+		$('<div />', {
+						class: 'day',
+						text: dayCounter,
+						}).appendTo('table tr:nth-child('+row+') td:nth-child('+col+')');
 		
 		$.each(monthQuizzes, function(index, obj){
 			if(dayCounter == obj.created_at.getUTCDate())
 			{
-				$('#calendar tr:nth-child('+row+') td:nth-child('+col+')').append("<br /><a href=\'/quizzes/" + obj.id + "\'>" + obj.id + "</a>");
+				if (obj.responded == true){
+					$('table tr:nth-child('+row+') td:nth-child('+col+') div.day').wrap('<a href="/quizzes/' + obj.id + '" />');
+					$('<div />', { class: 'responded', text: obj.score + "%" }).appendTo('table tr:nth-child('+row+') td:nth-child('+col+') a');
+				}else{
+					$('table tr:nth-child('+row+') td:nth-child('+col+') div.day').wrap('<a href="/quizzes/' + obj.id + '/respond" />');
+					$('<div />', { class: 'not_responded' }).appendTo('table tr:nth-child('+row+') td:nth-child('+col+') a');
+					$('<span />', { text: 'take quiz' }).appendTo('tr:nth-child('+row+') td:nth-child('+col+') div.not_responded');
+				}
 			};
 		});
+
 		// increment
 		dayCounter++;
 		col++;
@@ -75,16 +85,15 @@ $(document).ready(function(){
 
 		printCalendar(current_date, quizzes);
 
-
 		$('#next_month').click(function(){
-			$('#calendar td').text('');
+			$('table td').text('');
 			x = new Date(current_date.getUTCFullYear(), current_date.getUTCMonth()+1)
 			printCalendar(x,quizzes);
 			current_date = x;
 		});
 
 		$('#last_month').click(function(){
-			$('#calendar td').text('');
+			$('table td').text('');
 			x = new Date(current_date.getUTCFullYear(), current_date.getUTCMonth()-1)
 			printCalendar(x,quizzes);
 			current_date = x;
