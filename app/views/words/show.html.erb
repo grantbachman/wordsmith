@@ -7,7 +7,7 @@
 	</ul>
 	<div id="word_options">
 		<ul>
-		<li><%= button_to "Edit Definitions", edit_word_path(@word.id), method: :get, class: "btn btn-info" %></li>
+		<li><%= button_to "Edit Definitions", edit_word_path(@word.id), method: :get, class: "btn btn-primary" %></li>
 		<li><%= button_to "Delete Word", word_path(@word.id), method: :delete, confirm: "Are you sure you want to delete this word?", class: "btn btn-danger" %></li>
 		</ul>
 	</div>
