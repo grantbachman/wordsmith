@@ -1,0 +1,16 @@
+<div id="settings" class="centerDiv centerHeading">
+	<h1>Preferences</h1>
+
+	<%= form_for @user do |f| %>
+		<div class="prompts">
+			<span>Questions per quiz:</span>
+			<span>Send quiz each day at:</span>
+		</div>
+		<div class="options">
+			<span><%= f.select :num_quiz_questions, 5..15, {}, { class: "small" } %></span>
+			<span><%= f.select 'quiz_time', @times, {}, { class: "medium" } %>
+			<%= f.select 'quiz_time_zone', @time_zones, {}, { class: "large" } %></span>
+		</div>
+			<div id="submit"><%= f.submit "Save preferences", class: "btn btn-primary center" %></div>
+	<% end %>
+</div>

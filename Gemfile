@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.5'
 gem 'devise', '2.1.0'
-gem 'bootstrap-sass', '~> 2.0.4'
+gem 'bootstrap-sass', "~> 2.2.1.0"
 gem 'wordnik', "~> 4.07"
 gem 'thin', '1.4.1'
 gem 'foreman', '0.53.0'

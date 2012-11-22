@@ -2,7 +2,7 @@
 	<!--Auth Hash: <%= @quiz.auth_hash %>-->
 
 	<% if @quiz.responded? %>
-		<h1>Results for <%= Date.today.strftime("%A %b %-d, %Y") %></h1>
+		<h1>Results for <%= @quiz.created_at.strftime("%A %b %-d, %Y") %></h1>
 		<h3>Your score: <%= @quiz.score %>%</h3>
 		<ol>
 			<% @questions.each do |question| %>
@@ -28,6 +28,7 @@
 			<% end %>
 		</ol>
 	<% else %>
-		<div id="not_responded"><%= "You haven't responded to this quiz yet" %></div>
+		<div id="not_responded" class="center"><%= "You haven't completed this quiz yet" %></div>
+		<div id="not_responded" class="center"><%= link_to "Take it now", respond_quiz_path(@quiz.id) %></div>
 	<% end %>
 </div>

@@ -99,8 +99,12 @@ $(document).ready(function(){
 			current_date = x;
 		});
 
+		
+	}
+	if($('#results.new_quiz').length > 0)
+	{
 		// add a confirmation box if there are any unanswered questions	
-		$('.new_quiz form').submit(function(){
+		$('#results.new_quiz').submit(function(){
 				var blank = 0;
 
 			$('.choices').children().map(function(){
@@ -114,7 +118,7 @@ $(document).ready(function(){
 					pluralize = ['s', 'they']
 				}	
 				return confirm("You have " + blank + " unanswered question" + 
-					pluralize[0] + ".. Submit now and " + 
+					pluralize[0] + ". Submit now and " + 
 					pluralize[1] + " will be marked wrong. Are you sure?");
 			}
 		});

@@ -1,6 +1,6 @@
 <div id='results', class='new_quiz'>
 	<%= form_tag ("/quizzes/#{params[:id]}/check_answers") do %>
-		<h1>Quiz for <%= Date.today.strftime("%A %b %-d, %Y") %></h1>
+		<h1>Quiz for <%= @quiz.created_at.strftime("%A %b %-d, %Y") %></h1>
 		<ol>
 			<% @quiz.questions.each do |question| %>
 				<li>
@@ -21,6 +21,6 @@
 				</li>
 			<% end %>
 		</ol>
-		<%= submit_tag "Submit quiz" %>
+		<div id="submit"><%= submit_tag "Submit quiz", class: "btn btn-primary" %></div>
 	<% end %>
 </div>

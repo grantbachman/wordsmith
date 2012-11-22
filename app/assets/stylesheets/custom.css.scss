@@ -14,6 +14,20 @@ body#body {
 	height: 100%;
 }
 
+#navNavLinks .btn-group {
+	margin-top: -5px;
+}
+
+#navNavLinks div.btn-group:hover {	
+	ul.dropdown-menu {
+		margin: 0;
+		display: block;
+		li {
+			float: left;
+			clear: left;
+		}
+	}		
+}
 
 .center {
 	text-align: center;	
@@ -119,6 +133,57 @@ header {
 #flash_area {
 	height: 50px;
 }
+
+#settings {
+
+	width: 500px;
+
+	.prompts {
+		margin-top: 30px;
+		float: left;
+		width: 250px;
+		text-align: right;
+		span {
+			display: block;
+			height: 50px;
+			margin-right: 10px;
+		}
+	}
+
+	.options {
+		margin-top: 26px;
+		float: left;
+		width: 250px;
+		span {
+			display: block;
+			height: 50px;
+		}
+	}
+
+	.small { width: 50px; }
+	.medium { width: 75px; }
+	.large { width: 125px; }
+
+	select {
+		font-size: 14px;
+		padding: 0px 0px 0px 3px;
+		height: 25px;
+	}
+	#submit {
+		width: 254px;
+		margin-left: auto;
+		margin-right: auto;
+
+		input[type="submit"] {
+			font-size: 12pt;
+			width: 100%; 
+			margin-top: 10px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	}
+}
+
 #main {
 	width: 940px;
 	margin-left: auto;
@@ -299,11 +364,13 @@ ul#word_definitions {
 /* Quiz 'show' page */
 
 #results {
+	h1 {
+		padding-bottom: 15px;
+	}
 	#not_responded {
-		margin-top: 100px;
-		text-align: center;
-		color: red;
-		font-size: 30px;
+		margin-top: 50px;
+		font-size: 20px;
+		margin-bottom: 15px;
 	}
 
 	.definitions {
@@ -319,5 +386,18 @@ ul#word_definitions {
 	.right_wrong {
 		margin-top: 10px;
 	}
+	#submit {
+		width: 254px;
+		margin-left: auto;
+		margin-right: auto;
+
+		input[type="submit"] {
+			font-size: 12pt;
+			width: 100%; 
+			margin-top: 10px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	}	
 }
 /* end Quiz 'show' page */

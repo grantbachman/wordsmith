@@ -15,7 +15,9 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime        not null
 #  updated_at             :datetime        not null
-#  num_quiz_questions     :integer
+#  num_quiz_questions     :integer         default(7)
+#  quiz_time              :time
+#  quiz_time_zone         :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -27,7 +29,7 @@ class User < ActiveRecord::Base
 				 #:confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :num_quiz_questions, :quiz_time, :quiz_time_zone
   # attr_accessible :title, :body
 
 	has_many :words, :dependent => :destroy

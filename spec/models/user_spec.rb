@@ -41,6 +41,8 @@ end
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime        not null
 #  updated_at             :datetime        not null
-#  num_quiz_questions     :integer
+#  num_quiz_questions     :integer         default(7)
+#  quiz_time              :time
+#  quiz_time_zone         :string(255)
 #
 

@@ -1,7 +1,7 @@
 Wordsmith::Application.routes.draw do
 
   devise_for :users#, prefix: 'd'
-	resources :users, only: [:show]
+	resources :users, only: [:edit,:update]
 
   resources :words do
     get 'get_definition', on: :collection
@@ -16,27 +16,12 @@ Wordsmith::Application.routes.draw do
 
 	authenticated :user do
     root to: 'words#index'
-    #root to: 'words#new'
+    match 'settings' => "users#edit"
 	end
 
-  match 'about' => "static_pages#about"
+  match 'about' => "static_pages#about" 
 
 	root to: 'static_pages#index'
-
-	#match '/profile', to: "users#show"
-
-
-	#devise_scope :user do
-	#	match '/register', to: 'devise/registrations#new', :as => :register
-	#	match '/login', to: 'devise/sessions#new', :as => :login
-	#	match '/logout', to: 'devise/sessions#destroy', :as => :logout
-	#	match '/forgot_password', to: 'devise/passwords#new'
-	#	match '/resend_confirmation', to: 'devise/confirmations#new'
-	#end
-
-
-
-
 
 
   # The priority is based upon order of creation:

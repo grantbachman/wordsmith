@@ -1,6 +1,11 @@
 <nav>
 	<ul class="nav pull-right">
 		<% if signed_in? %>
+			<div class="btn-group">
+			<a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+				Me<span class="carer"></span>
+			</a>	
+			</div>
 			<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 		<% else %>
 			<li><%= link_to "Log in", new_user_session_path %></li>

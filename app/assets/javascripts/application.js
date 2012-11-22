@@ -17,4 +17,16 @@
 
 $(document).ready(function(){
 	$(".flash_message").delay(2000).slideUp('slow');
+
+/* JESUS FUCKING CHRIST. 
+
+	// Apparently this doesn't exist/work in the bootstrap gem I'm using...
+	$("#navNavLinks .btn-group").click(function(){
+		$("#navNavLinks div.btn-group").toggleClass("open");
+	});
+	$("#navNavLinks .btn-group").blur(function(){
+		$("#navNavLinks div.btn-group").toggleClass("close");
+	});
+*/
+
 });
