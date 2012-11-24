@@ -19,7 +19,7 @@ class QuizzesController < ApplicationController
 		# Find a better way to write this.	
 		@quizzes = current_user.quizzes.select("id, created_at, responded, score")
 		@quizzes.uniq! { |x| x.created_at.to_date } # Remove duplicates
-		@quizzes.map { |x| x.created_at = x.created_at.to_i*1000 }
+		@quizzes.map { |x| x.created_at = x.created_at.in_time_zone(current_user.quiz_time_zone).to_i*1000 }
 	end
 
 	def respond

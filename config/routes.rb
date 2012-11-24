@@ -1,6 +1,6 @@
 Wordsmith::Application.routes.draw do
 
-  devise_for :users#, prefix: 'd'
+  devise_for :users
 	resources :users, only: [:edit,:update]
 
   resources :words do
@@ -12,7 +12,6 @@ Wordsmith::Application.routes.draw do
     post 'check_answers', on: :member
     post 'quiz_from_email', on: :collection
   end
-	resources :incoming_emails, only: [:new,:create,:index]
 
 	authenticated :user do
     root to: 'words#index'
