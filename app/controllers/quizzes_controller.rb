@@ -64,10 +64,8 @@ class QuizzesController < ApplicationController
 			end
 		end
 
-		grade_quiz(@quiz_hash)	
+		grade_quiz(@quiz_hash) unless quiz.responded?
 
-		#render 'create'
-		#render nothing: true
 	end
 
 	private

@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Wordsmith</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-	<!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-</head>
-<body id="body">
-	<header>
-		<div class="container">
-			<%= link_to "wordsmith", root_path, id: "logo" %> 
-			<nav>
-				<ul class="">
-					<% if signed_in? %> 
-						<div id="navNavLinks">
-								<li><%= link_to "Quizzes", quizzes_path %></li> 
-								<li><%= link_to "Words", words_path %></li>
-							<li>
-							<div class="btn-group">
-								<a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">Me <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><%= link_to "Settings", settings_path %></li>
-									<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-								</ul>
-							</div>	  
-						</li>
-						</div>
-					<% else %>
-						<%= render 'shared/login_form' if current_page?(root_path) %>
-					<% end %>
-				</ul>
-			</nav>	
-			<%#= render 'layouts/header' %>
+	<head>
+	  <title>Wordsmith</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+		<!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body id="body">
+		<header>
+			<div class="container">
+				<%= link_to "wordsmith", root_path, id: "logo" %> 
+				<nav>
+					<ul class="">
+						<% if signed_in? %> 
+							<div id="navNavLinks">
+									<li><%= link_to "Quizzes", quizzes_path %></li> 
+									<li><%= link_to "Words", words_path %></li>
+								<li>
+								<div class="btn-group">
+									<a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">Me <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><%= link_to "Settings", settings_path %></li>
+										<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+									</ul>
+								</div>	  
+							</li>
+							</div>
+						<% else %>
+							<%= render 'shared/login_form' if current_page?(root_path) %>
+						<% end %>
+					</ul>
+				</nav>	
+				<%#= render 'layouts/header' %>
+			</div>
+		</header>
+		<div id="main" class="row-fluid">
+			<div id="flash_area">
+				<% unless (params[:controller].in?(['devise/sessions','devise/registrations'])) %>
+						<%= render 'shared/flash_messages' %>
+				<% end %>
+			</div>
+			<div class="span12">
+							<%= yield %>
+				<%= debug(params) if Rails.env.development? %>
+			</div>
 		</div>
-	</header>
-	<div id="main" class="row-fluid">
-		<div id="flash_area">
-			<% unless (params[:controller].in?(['devise/sessions','devise/registrations'])) %>
-					<%= render 'shared/flash_messages' %>
-			<% end %>
-		</div>
-		<div class="span12">
-						<%= yield %>
-			<%= debug(params) if Rails.env.development? %>
-		</div>
-		<div class="push"></div>
-		<footer>
-			<%#= render 'shared/footer' %>
-		</footer>
+	</body>
+	<div id="footer">
+		<%= render 'shared/footer' %>
 	</div>
-</body>
 </html>
