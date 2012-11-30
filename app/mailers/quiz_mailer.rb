@@ -16,6 +16,7 @@ class QuizMailer < ActionMailer::Base
 	  	}
 
 		@quiz = user.quizzes.create
+		@quiz_address = "http://getwordsmith.com/quizzes/#{@quiz.id}/respond"
 		@questions = @quiz.questions.all(order: "number")
 		@word_bank = @quiz.word_bank.split(',')
 
