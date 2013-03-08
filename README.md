@@ -1,5 +1,6 @@
-#[Wordsmith](http://www.getwordsmith.com)
+####Note: Development on this project is halted. After using it for a month or so, I realized it would be much better suited as a mobile app. Onward and upward!
 
+#Wordsmith
 Wordsmith ([getwordsmith.com](http://www.getwordsmith.com)) is a free service built with Ruby on Rails that sends you daily vocabulary quizzes via email. Simply reply to the email with your answers and we'll keep track of your progress.
 
 ###Features
